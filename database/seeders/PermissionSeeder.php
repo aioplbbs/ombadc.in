@@ -69,6 +69,11 @@ class PermissionSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'update sector']);
         Permission::firstOrCreate(['name' => 'delete sector']);
 
+        Permission::firstOrCreate(['name' => 'view department']);
+        Permission::firstOrCreate(['name' => 'create department']);
+        Permission::firstOrCreate(['name' => 'update department']);
+        Permission::firstOrCreate(['name' => 'delete department']);
+
         Permission::firstOrCreate(['name' => 'view settings']);
         Permission::firstOrCreate(['name' => 'update settings']);
         

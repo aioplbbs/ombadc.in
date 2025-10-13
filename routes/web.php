@@ -14,6 +14,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MenusController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SectorController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\FrontController;
 
 /*
@@ -55,6 +56,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])
     });
     Route::resource('/sector', SectorController::class)->except(['show']);
     Route::delete('/sector/{sector}/image-destroy/{gid}', [SectorController::class, 'imageDestroy'])->name('sector.image_destroy');
+    Route::resource('/department', DepartmentController::class)->except(['show']);
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('/settings', [SettingController::class, 'store'])->name('settings.store');
 

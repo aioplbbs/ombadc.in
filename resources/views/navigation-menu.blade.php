@@ -91,6 +91,15 @@
               </li>
               @endcan
 
+              @can('view department')
+              <li class="side-nav-item">
+                  <a href="{{route('department.index')}}" class="side-nav-link">
+                      <span class="menu-icon"><i class="ri-menu-unfold-2-fill"></i></span>
+                      <span class="menu-text"> Department </span>
+                  </a>
+              </li>
+              @endcan
+
               <li class="side-nav-title">Admin Section</li>
 
               @can('view user')
