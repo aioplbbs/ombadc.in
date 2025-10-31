@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
+use App\Models\District;
 use Illuminate\Http\Request;
 use App\Models\Page;
 use App\Models\Menu;
@@ -20,6 +22,9 @@ class FrontController extends Controller
             ->with(['menus' => function($q){
                 $q->whereNull('parent_id')->orderBy('position', 'asc')->with('children');
             }])->get();
+        
+        $area_overview = Setting::where('name', 'area_overview')->first();
+
 
         if(!empty($setting)){
             foreach ($setting as $value) {
@@ -42,12 +47,17 @@ class FrontController extends Controller
             }
         }
 
-        return view('front_end.index', compact('menus', 'notices', 'banners', 'galleries'));
+        $sectors=Page::with('departments.projects', 'customData')->where('page_type', 'Sector')->get();
+        $districts = District::all();
+        $departments = Department::all();
+        // dd($sectors);
+
+        return view('front_end.index', compact('menus', 'notices', 'banners', 'galleries', 'area_overview', 'sectors', 'districts', 'departments'));
     }
 
     public function page($slug = '')
     {
-        if($page = Page::where('slug', $slug)->first()){
+        if($page = Page::with('customData')->where('slug', $slug)->first()){
             $menus = [];
             $setting = Setting::where('name', 'menu')
             ->with(['menus' => function($q){
@@ -177,5 +187,68 @@ class FrontController extends Controller
         }
 
         return $result;
+    }
+
+    public function history(){
+        $menus = $notices = [];
+        $setting = Setting::where('name', 'menu')
+            ->with(['menus' => function($q){
+                $q->whereNull('parent_id')->orderBy('position', 'asc')->with('children');
+            }])->get();
+        
+        $area_overview = Setting::where('name', 'area_overview')->first();
+
+
+        if(!empty($setting)){
+            foreach ($setting as $value) {
+                $menus[$value->data['name']] = $this->buildMenuTree($value->menus);
+            }
+        }
+
+        $departments = Department::all();
+
+        return view('front_end.history', compact('menus', 'departments'));
+    }
+
+    public function purpose(){
+        $menus = $notices = [];
+        $setting = Setting::where('name', 'menu')
+            ->with(['menus' => function($q){
+                $q->whereNull('parent_id')->orderBy('position', 'asc')->with('children');
+            }])->get();
+        
+        $area_overview = Setting::where('name', 'area_overview')->first();
+
+
+        if(!empty($setting)){
+            foreach ($setting as $value) {
+                $menus[$value->data['name']] = $this->buildMenuTree($value->menus);
+            }
+        }
+
+        $departments = Department::all();
+
+        return view('front_end.purpose-of-spv', compact('menus', 'departments'));
+    }
+
+    public function organogram(){
+        $menus = $notices = [];
+        $setting = Setting::where('name', 'menu')
+            ->with(['menus' => function($q){
+                $q->whereNull('parent_id')->orderBy('position', 'asc')->with('children');
+            }])->get();
+        
+        $area_overview = Setting::where('name', 'area_overview')->first();
+
+
+        if(!empty($setting)){
+            foreach ($setting as $value) {
+                $menus[$value->data['name']] = $this->buildMenuTree($value->menus);
+            }
+        }
+
+        $departments = Department::all();
+
+        return view('front_end.organogram', compact('menus', 'departments'));
     }
 }

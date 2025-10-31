@@ -29,6 +29,12 @@ class SettingRequest extends FormRequest
             'social.facebook'   => 'nullable|url',
             'social.linked_in'   => 'nullable|url',
             'social.google'   => 'nullable|url',
+            'mobile'=> 'nullable|string|max:255',
+            'email'=> 'nullable|email',
+            'address'=> 'nullable|string|max:500',
+            'map'=>'nullable|string|max:1000',
+            'area_overview'   => 'nullable|array',
+            'area_overview.*' => 'nullable|numeric',
         ];
 
         return $rules;

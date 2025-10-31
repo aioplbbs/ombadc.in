@@ -29,7 +29,7 @@ class PageController extends Controller
             'items' => ["Home"],
             'last_item' => "Pages"
         ];
-        $pages = Page::whereIn('page_type', ['Left', 'Right', 'None'])->orderBy('id', 'desc')->paginate(20);
+        $pages = Page::whereNotIn('page_type', ['Sector'])->orderBy('id', 'desc')->paginate(20);
         return view('page.index', compact('pages', 'breadcrumb'));
     }
 
@@ -52,7 +52,7 @@ class PageController extends Controller
     public function store(PageRequest $request)
     {
         $data = $request->all();
-        $data['page_content'] = Purifier::clean($data['page_content']);
+        $data['page_content'] = Purifier::clean($data['page_content'], 'relaxed');
         $page = New Page($data);
         $page->save();
         if($request->hasFile('banner')){
@@ -62,6 +62,10 @@ class PageController extends Controller
         if($request->hasFile('photo')){
             $file = $request->file('photo');
             $page->addMedia($file)->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())->toMediaCollection('page_photo');
+        }
+        if($request->hasFile('pdf')){
+            $file = $request->file('pdf');
+            $page->addMedia($file)->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())->toMediaCollection('page_pdf');
         }
     
         return redirect()->route('page.index')->with('success', "Page Added Successfully.");
@@ -105,7 +109,12 @@ class PageController extends Controller
             $file = $request->file('photo');
             $page->addMedia($file)->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())->toMediaCollection('page_photo');
         }
-        $data['page_content'] = Purifier::clean($data['page_content']);
+        if($request->hasFile('pdf')){
+            $page->clearMediaCollection('page_pdf');
+            $file = $request->file('pdf');
+            $page->addMedia($file)->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())->toMediaCollection('page_pdf');
+        }
+        $data['page_content'] = Purifier::clean($data['page_content'], 'relaxed');
         $page->update($data);
 
         return redirect()->route('page.index')->with('success', "Page Updated Successfully.");

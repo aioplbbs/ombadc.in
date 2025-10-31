@@ -21,7 +21,7 @@ class LoadSiteSettings
         }
         if (!session()->has('site_settings')) {
             $settings = Setting::whereIn('name', [
-                'site_title', 'site_logo', 'site_favicon', 'social'
+                'site_title', 'site_logo', 'site_favicon', 'social', 'email', 'address', 'map'
             ])->get()->keyBy('name');
             session([
                 'site_settings' => [
@@ -29,6 +29,9 @@ class LoadSiteSettings
                     'site_logo' => !empty($settings['site_logo'])?$settings['site_logo']->getFirstMediaUrl('site_logo') : '#',
                     'site_favicon' => !empty($settings['site_favicon'])?$settings['site_favicon']->getFirstMediaUrl('site_favicon') : '#',
                     'social' => $settings['social']->data ?? '',
+                    'email' => $settings['email']->data ?? '',
+                    'address'=> $settings['address']->data ?? '',
+                    'map'=> $settings['map']->data ?? ''
                 ]
             ]);
         }

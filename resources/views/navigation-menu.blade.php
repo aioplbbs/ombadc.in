@@ -85,7 +85,7 @@
               @can('view sector')
               <li class="side-nav-item">
                   <a href="{{route('sector.index')}}" class="side-nav-link">
-                      <span class="menu-icon"><i class="ri-menu-unfold-2-fill"></i></span>
+                      <span class="menu-icon"><i class="ri-community-line"></i></span>
                       <span class="menu-text"> Sector </span>
                   </a>
               </li>
@@ -94,8 +94,71 @@
               @can('view department')
               <li class="side-nav-item">
                   <a href="{{route('department.index')}}" class="side-nav-link">
-                      <span class="menu-icon"><i class="ri-menu-unfold-2-fill"></i></span>
+                      <span class="menu-icon"><i class="ri-building-line"></i></span>
                       <span class="menu-text"> Department </span>
+                  </a>
+              </li>
+              @endcan
+
+              @can('view project')
+              <li class="side-nav-item">
+                  <a href="{{route('project.index')}}" class="side-nav-link">
+                      <span class="menu-icon"><i class="ri-folder-line"></i></span>
+                      <span class="menu-text"> Project </span>
+                  </a>
+              </li>
+              @endcan
+
+              @can('view district')
+              <li class="side-nav-item">
+                  <a href="{{route('district.index')}}" class="side-nav-link">
+                      <span class="menu-icon"><i class="ri-map-pin-line"></i></span>
+                      <span class="menu-text"> District </span>
+                  </a>
+              </li>
+              @endcan
+
+              @can('view personal-profile')
+              <li class="side-nav-item">
+                  <a href="{{route('personal-profile.index')}}" class="side-nav-link">
+                      <span class="menu-icon"><i class="ri-user-2-line"></i></span>
+                      <span class="menu-text"> Personal Profile </span>
+                  </a>
+              </li>
+              @endcan
+
+              @can('view document')
+              <li class="side-nav-item">
+                  <a href="{{route('document.index')}}" class="side-nav-link">
+                      <span class="menu-icon"><i class="ri-file-list-line"></i></span>
+                      <span class="menu-text"> Documents </span>
+                  </a>
+              </li>
+              @endcan
+
+              @can('view repository')
+              <li class="side-nav-item">
+                  <a href="{{route('repository.index')}}" class="side-nav-link">
+                      <span class="menu-icon"><i class="ri-git-repository-line"></i></span>
+                      <span class="menu-text"> Repository </span>
+                  </a>
+              </li>
+              @endcan
+
+              @can('view article')
+              <li class="side-nav-item">
+                  <a href="{{route('article.index')}}" class="side-nav-link">
+                      <span class="menu-icon"><i class="ri-article-line"></i></span>
+                      <span class="menu-text"> Article </span>
+                  </a>
+              </li>
+              @endcan
+
+              @can('view department-website')
+              <li class="side-nav-item">
+                  <a href="{{route('department-website.index')}}" class="side-nav-link">
+                      <span class="menu-icon"><i class="ri-earth-line"></i></span>
+                      <span class="menu-text"> Department Website </span>
                   </a>
               </li>
               @endcan

@@ -26,7 +26,7 @@ class SettingController extends Controller
             'items' => ["Home"],
             'last_item' => "Settings"
         ];
-        $setting = Setting::whereIn('name', ['site_title', 'site_logo', 'site_favicon', 'social'])->pluck('data', 'name');
+        $setting = Setting::whereIn('name', ['site_title', 'site_logo', 'site_favicon', 'social', 'mobile', 'email', 'address', 'map', 'area_overview'])->pluck('data', 'name');
         return view('setting.index', compact('setting', 'breadcrumb'));
     }
 
@@ -43,12 +43,32 @@ class SettingController extends Controller
             ['name' => 'social'],
             ['data' => $request->social]
         );
+        Setting::updateOrCreate(
+            ['name' => 'area_overview'],
+            ['data' => $request->area_overview]
+        );
+        Setting::updateOrCreate(
+            ['name' => 'mobile'],
+            ['data' => ["value"=>$request->mobile]]
+        );
+        Setting::updateOrCreate(
+            ['name' => 'email'],
+            ['data' => ["value"=>$request->email]]
+        );
+        Setting::updateOrCreate(
+            ['name' => 'address'],
+            ['data' => ["value"=>$request->address]]
+        );
+        Setting::updateOrCreate(
+            ['name' => 'map'],
+            ['data' => ["value"=>$request->map]]
+        );
         if($request->hasFile('site_favicon')){
             $favicon = Setting::updateOrCreate(
                 ['name' => 'site_favicon'],
                 ['data' => []]
             );
-            $logo->clearMediaCollection('site_favicon');
+            $favicon->clearMediaCollection('site_favicon');
             $file = $request->file('site_favicon');
             $favicon->addMedia($file)->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())->toMediaCollection('site_favicon');
         }

@@ -31,15 +31,63 @@
                                     <input type="radio" id="None" name="page_type" value="None" class="form-check-input" {{old('page_type', 'None')=='None'?'checked':''}}>
                                     <label class="form-check-label" for="None">None</label>
                                 </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Downloads" name="page_type" value="Downloads" class="form-check-input" {{old('page_type', 'None')=='Downloads'?'checked':''}}>
+                                    <label class="form-check-label" for="Downloads">Downloads</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Annual-reports" name="page_type" value="Annual Reports" class="form-check-input" {{old('page_type', 'None')=='Annual Reports'?'checked':''}}>
+                                    <label class="form-check-label" for="Annual-reports">Annual Reports</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Brochures" name="page_type" value="Brochures" class="form-check-input" {{old('page_type', 'None')=='Brochures'?'checked':''}}>
+                                    <label class="form-check-label" for="Brochures">Brochures</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Meetings" name="page_type" value="Meetings" class="form-check-input" {{old('page_type', 'None')=='Meetings'?'checked':''}}>
+                                    <label class="form-check-label" for="Meetings">Meetings</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Orders" name="page_type" value="Orders" class="form-check-input" {{old('page_type', 'None')=='Orders'?'checked':''}}>
+                                    <label class="form-check-label" for="Orders">Orders</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Guidelines" name="page_type" value="Guidelines" class="form-check-input" {{old('page_type', 'None')=='Guidelines'?'checked':''}}>
+                                    <label class="form-check-label" for="Guidelines">Guidelines</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Success-story" name="page_type" value="Success Story" class="form-check-input" {{old('page_type', 'None')=='Success Story'?'checked':''}}>
+                                    <label class="form-check-label" for="Success-story">Success Story</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Documents" name="page_type" value="Documents" class="form-check-input" {{old('page_type', 'None')=='Documents'?'checked':''}}>
+                                    <label class="form-check-label" for="Documents">Documents</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Articles" name="page_type" value="Articles" class="form-check-input" {{old('page_type', 'None')=='Articles'?'checked':''}}>
+                                    <label class="form-check-label" for="Articles">Articles</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Repository" name="page_type" value="Repository" class="form-check-input" {{old('page_type', 'None')=='Repository'?'checked':''}}>
+                                    <label class="form-check-label" for="Repository">Repository</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Department-website" name="page_type" value="Department Website" class="form-check-input" {{old('page_type', 'None')=='Department Website'?'checked':''}}>
+                                    <label class="form-check-label" for="Department-website">Department Website</label>
+                                </div>
                             </div>
                             <div class="row mb-3">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="banner" class="form-label">Upload Banner</label>
                                     <input type="file" id="banner" name="banner" class="form-control">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="photo" class="form-label">Upload Photo</label>
                                     <input type="file" id="photo" name="photo" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="pdf" class="form-label">Upload PDF</label>
+                                    <input type="file" id="pdf" name="pdf" class="form-control">
                                 </div>
                             </div>
                             <div class="row mb-3">

@@ -25,9 +25,9 @@ return [
     'settings'      => [
         'default' => [
             'HTML.Doctype'             => 'HTML 4.01 Transitional',
-            'HTML.Allowed'             => 'div,b,strong,i,em,u,a[href|title],ul,ol,li,p[style],br,span[style],img[width|height|alt|src]',
+            'HTML.Allowed'             => 'div,section,b,strong,i,em,u,a[href|title],ul,ol,li,p[style],br,span[style],img[width|height|alt|src]',
             'CSS.AllowedProperties'    => 'font,font-size,font-weight,font-style,font-family,text-decoration,padding-left,color,background-color,text-align',
-            'AutoFormat.AutoParagraph' => true,
+            'AutoFormat.AutoParagraph' => false,
             'AutoFormat.RemoveEmpty'   => true,
         ],
         'test'    => [
@@ -100,6 +100,22 @@ return [
         ],
         'custom_elements' => [
             ['u', 'Inline', 'Inline', 'Common'],
+        ],
+        'relaxed' => [
+            'HTML.SafeIframe' => true,
+            'URI.SafeIframeRegexp' => '%^(https?:)?//%',
+            'HTML.Allowed' => '
+                section,div,span,h1,h2,h3,h4,h5,h6,p,br,hr,b,strong,i,u,em,a[href|title|target|class],
+                ul,ol,li,img[src|alt|width|height|style|class],
+                table,tr,td,th,thead,tbody,tfoot,
+                style,blockquote,pre,code,
+                header,footer,nav,main,
+                article,aside,figure,figcaption
+            ',
+            'CSS.AllowedProperties'    => null,
+            'HTML.AllowedAttributes' => '*.class,*.style,*.id,src,href,alt,width,height,frameborder,allowfullscreen',
+            'AutoFormat.AutoParagraph' => false,
+            'AutoFormat.RemoveEmpty' => false,
         ],
     ],
 

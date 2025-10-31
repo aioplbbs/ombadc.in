@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Mews\Purifier\Casts\CleanHtmlInput;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Str;
@@ -16,6 +17,7 @@ class Page extends Model implements HasMedia
     protected $fillable = ['name', 'slug', 'page_type', 'page_content', 'seo', 'status'];
 
     protected $casts = [
+        'name' => CleanHtmlInput::class,
         'seo' => 'array'
     ];
 
@@ -62,9 +64,11 @@ class Page extends Model implements HasMedia
         ]);
     }
 
-    public function getCustomAttribute($value)
+    public function getSubContentAttribute()
     {
-        return $this->customData()->select('data')->where('name', 'sector_data')->first();
+        $page_type = $this->attributes['page_type'];
+        $page_id = $this->attributes['id'];
+        return Page::where('page_type', $page_type)->where('id', '!=', $page_id)->get();
     }
 
     public function customData()
@@ -76,5 +80,10 @@ class Page extends Model implements HasMedia
     {
         $this->addMediaCollection('page_banner');
         $this->addMediaCollection('page_photo');
+        $this->addMediaCollection('page_pdf');
+    }
+
+    public function departments(){
+        return $this->hasMany(Department::class, 'page_id');
     }
 }

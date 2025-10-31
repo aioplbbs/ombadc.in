@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id');
             $table->string('name', 200);
             $table->string('slug');
-            $table->enum('page_type', ['Left', 'Right', 'Faculty', 'None'])->default("None");
+            $table->enum('page_type', ['Left', 'Right', 'Faculty', 'None', 'Downloads','Annual Reports','Brochures','Meetings','Orders','Guidelines','Success Story','Documents','Articles','Repository','Dept websites'])->default("None");
             $table->text('page_content')->nullable();
             $table->json('seo')->nullable();
             $table->enum('status', ['Show', 'Hide'])->default("Show");

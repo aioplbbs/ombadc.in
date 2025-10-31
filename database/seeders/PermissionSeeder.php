@@ -74,6 +74,41 @@ class PermissionSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'update department']);
         Permission::firstOrCreate(['name' => 'delete department']);
 
+        Permission::firstOrCreate(['name' => 'view project']);
+        Permission::firstOrCreate(['name' => 'create project']);
+        Permission::firstOrCreate(['name' => 'update project']);
+        Permission::firstOrCreate(['name' => 'delete project']);
+
+        Permission::firstOrCreate(['name' => 'view district']);
+        Permission::firstOrCreate(['name' => 'create district']);
+        Permission::firstOrCreate(['name' => 'update district']);
+        Permission::firstOrCreate(['name' => 'delete district']);
+
+        Permission::firstOrCreate(['name' => 'view personal-profile']);
+        Permission::firstOrCreate(['name' => 'create personal-profile']);
+        Permission::firstOrCreate(['name' => 'update personal-profile']);
+        Permission::firstOrCreate(['name' => 'delete personal-profile']);
+
+        Permission::firstOrCreate(['name' => 'view document']);
+        Permission::firstOrCreate(['name' => 'create document']);
+        Permission::firstOrCreate(['name' => 'update document']);
+        Permission::firstOrCreate(['name' => 'delete document']);
+
+        Permission::firstOrCreate(['name' => 'view repository']);
+        Permission::firstOrCreate(['name' => 'create repository']);
+        Permission::firstOrCreate(['name' => 'update repository']);
+        Permission::firstOrCreate(['name' => 'delete repository']);
+
+        Permission::firstOrCreate(['name' => 'view article']);
+        Permission::firstOrCreate(['name' => 'create article']);
+        Permission::firstOrCreate(['name' => 'update article']);
+        Permission::firstOrCreate(['name' => 'delete article']);
+
+        Permission::firstOrCreate(['name' => 'view department-website']);
+        Permission::firstOrCreate(['name' => 'create department-website']);
+        Permission::firstOrCreate(['name' => 'update department-website']);
+        Permission::firstOrCreate(['name' => 'delete department-website']);
+
         Permission::firstOrCreate(['name' => 'view settings']);
         Permission::firstOrCreate(['name' => 'update settings']);
         

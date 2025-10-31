@@ -1,63 +1,278 @@
 <x-front-layout :menus="$menus">
-<div class="inner-banner">
+<!-- <div class="inner-banner">
     <img src="{{frontAsset('/assets/image/innerbanner.jpg')}}" alt="" width="100%" />
     <p class="inner-banner__text"><a href="">Home</a> <i class="fa-solid fa-angles-right"></i> {{$page->name}}</p>
-</div>
+</div> -->
+@push('style')
+<style>
+    #morex,
+    #morex1,
+    #morex3,
+    #morex6,
+    #morex9 {
+      display: none ;
+    }
 
-<section>
-    <div class="container">
-        <div class="row d-flex justify-content-between mt-2">
-            @if($page->page_type=='None')
-            <div class="col-md-12 mx-auto">
-                <h2 class="main-heading">{{$page->name}}</h2>
-                 <div class="content">
-                      {!! $page->page_content !!}
-                </div>
-            </div>
-            @elseif($page->page_type=="Left")
-            
-                    <div class="col-md-8 mx-auto">
+    .scrollable {
+      overflow: auto ;
+    }
 
-                              <div class="content">
-                                <h2 class="main-heading">{{$page->name}}</h2>
-                      {!! $page->page_content !!}
-                             </div>
-                    </div>
-            <div class="col-md-4 mx-auto">
-                <div class="content">
-                <img src="{{$page->getFirstMediaUrl('page_photo')}}" alt="" width="100%" style="border-radius: 8px; border:5px solid gray" />
-           </div>
-            </div>
+    .non-scrollable {
+      overflow: hidden ;
+    }
+
+    .btn-readmore {
+      border: none;
+      /* color: red; */
+      background: none;
+      text-align: right;
+      /* right: 0px; */
+      font-size: 20px;
+      padding: 0;
+      margin: 0;
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
 
 
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
 
 
-            @elseif($page->page_type=="Right")
-
-
-
-             <h2 class="main-heading">{{$page->name}}</h2>
-                  
-            <div class="col-md-4 mx-auto">
-                <div class="content">
-                <img src="" alt="" width="100%" style="border-radius: 8px; border:5px solid gray" />
-           </div>
-            </div>
-              <div class="col-md-8 mx-auto">
-                
-                              <div class="content">
-                      {!! $page->page_content !!}
-                             </div>
-                    </div>
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+    }
 
 
 
-
-            @endif
-        </div>
-    </div>
-</section>
+    ::-webkit-scrollbar-thumb:hover {
+      background: #008b3d;
+    }
 
 
 
+    #containertfgh {
+      /* border: 1px solid red; */
+    width: 100%;
+    height: 550px;
+    position: relative;
+      /* background: radial-gradient(ellipse at center, rgba(139, 143, 145, 1) 0%, rgba(111, 113, 113, 1) 47%, rgba(63, 63, 65, 1) 100%); */
+    }
+
+    .legendio {
+      position: absolute;
+      color: #315d2c;
+      left: 40vh;
+      top: -3vh;
+      text-align: center;
+      /* border: 1px solid red; */
+      width: 40vh;
+      font-size: 6vh;
+      font-weight: bold;
+
+    }
+
+
+    .item15 {
+      border: solid 25px #92dcab;
+      border-radius: 100%;
+      position: absolute;
+      box-shadow: #000 0 0 15px;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .item25 {
+      border: solid 20px #329152;
+      border-radius: 100%;
+      position: absolute;
+      box-shadow: #000 0 0 15px;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .item35 {
+      border: solid 19px #003e15;
+      border-radius: 100%;
+      position: absolute;
+      box-shadow: #000 0 0 15px;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+
+
+
+    .valuehtju {
+      display: flex;
+      flex-grow: 1.5;
+      /* font-family: 'Rubik'; */
+      font-weight: bold;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .valuehtju span {
+      vertical-align: baseline;
+    }
+
+    .valuehtju small {
+      font-size: .5em;
+      line-height: 1em;
+    }
+
+    .titleopls {
+      flex-grow: 1;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .titleopls i {
+      display: block;
+      font-size: 1.4em;
+    }
+
+    #first {
+      left:0;
+      top: 0;
+      width: 300px;
+      height: 300px;
+      z-index: 1;
+    }
+
+    #first .valuehtju {
+      font-size: 45px;
+    }
+
+    #first .titleopls {
+      font-size: 30px;
+      margin-top: 15px;
+    }
+
+    #second {
+      left: 213px;
+    top: 177px;
+      width: 250px;
+      height: 250px;
+      z-index: 2;
+    }
+
+    #second .valuehtju {
+      font-size: 35px;
+    }
+
+    #second .titleopls {
+      margin-top: 15px;
+      font-size: 30px;
+    }
+
+    #third {
+      left: 69px;
+    top: 335px;
+      width: 230px;
+      height: 230px;
+      z-index: 3;
+    }
+
+    #third .valuehtju {
+      font-size: 30px;
+    }
+
+    #third .titleopls {
+      font-size: 30px;
+      margin-top: 15px;
+    }
+  </style>
+@endpush
+
+
+    @switch($page->page_type)
+      @case('Sector')
+        @include('front_end.pages.sector')
+        @break
+      @case('Annual Reports')
+        @include('front_end.pages.publication')
+        @break
+      @case('Brochures')
+        @include('front_end.pages.publication')
+        @break
+      @case('Articles')
+        @include('front_end.pages.publication')
+        @break
+      @case('Success Story')
+        @include('front_end.pages.publication')
+        @break
+    @endswitch
+
+@push('script')
+  <script data-cfasync="false" src="https://www.ombadc.in/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script>
+    function toggleReadMore6() {
+      var dots = document.getElementById("dots6");
+      var moreText = document.getElementById("morex6"); // mention in upper css to display none
+      var btnText = document.getElementById("moreBtn6");
+      var scrollableText = document.getElementById("scrollableText6");
+      if (dots.style.display === "none") {
+        dots.style.display = "inline";
+        btnText.innerHTML = "Read more...";
+        moreText.style.display = "none";
+        scrollableText.className = "non-scrollable";
+      } else {
+        dots.style.display = "none";
+        btnText.innerHTML = "Read less...";
+        moreText.style.display = "inline";
+        scrollableText.className = "scrollable";
+      }
+    }
+  </script>
+  <script>
+		// number animate when it aper in view port
+       $(document).ready(function() {
+    const options = {
+      root: null, // Use the viewport as the root
+      rootMargin: '0px',
+      threshold: 0.1, // When 10% of the element is in the viewport
+    };
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+			
+          const $element = $(entry.target);
+          const finalValue = parseFloat($element.data('final-value'));
+          const duration = 3000; // 3 seconds
+          const steps = 120; // Number of animation steps
+          const stepValue = finalValue / steps;
+          let currentValue = 0;
+          const stepDuration = duration / steps;
+
+          function animateValue() {
+            if (currentValue < finalValue) {
+              currentValue += stepValue;
+              $element.text(Math.round(currentValue));
+              setTimeout(animateValue, stepDuration);
+            } else {
+              $element.text(finalValue);
+            }
+          }
+
+          animateValue();
+          observer.unobserve(entry.target); // Stop observing once animation starts
+        }
+      });
+    }, options);
+
+    $('.animate').each(function() {
+      observer.observe(this);
+    });
+  });
+    </script>
+@endpush
 </x-front-layout>

@@ -16,4 +16,8 @@ class Department extends Model
     {
         return $this->belongsTo(Page::class, 'page_id', 'id');
     }
+
+    public function projects(){
+        return $this->hasMany(Project::class,'department_id','id');
+    }
 }

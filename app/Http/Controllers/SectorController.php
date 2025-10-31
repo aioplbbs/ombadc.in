@@ -53,7 +53,7 @@ class SectorController extends Controller
     {
         $data = $request->all();
         $data['page_type'] = 'Sector';
-        $data['page_content'] = Purifier::clean($data['page_content']);
+        $data['page_content'] = Purifier::clean($data['page_content'], 'relaxed');
         $page = New Page($data);
         $page->save();
         $page->customData()->updateOrCreate(
@@ -110,7 +110,7 @@ class SectorController extends Controller
             $file = $request->file('photo');
             $sector->addMedia($file)->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())->toMediaCollection('page_photo');
         }
-        $data['page_content'] = Purifier::clean($data['page_content']);
+        $data['page_content'] = Purifier::clean($data['page_content'], 'relaxed');
         $sector->update($data);
         $sector->customData()->updateOrCreate(
             ['name' => 'sector_data'],

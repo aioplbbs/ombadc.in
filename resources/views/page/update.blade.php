@@ -46,7 +46,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="banner" class="form-label">Upload Banner</label>
                                     <input type="file" id="banner" name="banner" class="form-control">
                                     @if($media = $page->getFirstMedia('page_banner'))
@@ -60,12 +60,26 @@
                                         </div>
                                     @endif
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="photo" class="form-label">Upload Photo</label>
                                     <input type="file" id="photo" name="photo" class="form-control">
                                     @if($media = $page->getFirstMedia('page_photo'))
                                         <div class="position-relative" style="width:120px;">
                                             <img src="{{ $media->getUrl() }}" class="img-thumbnail mt-2" width="120">
+                                            <div class="fs-17 text-white position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"
+                                                onclick="deleteFunction(`{{ route('page.image_destroy', ['page' => $page->id, 'gid' => $media->id]) }}`)"
+                                                data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                    <i class="ri-delete-bin-line"></i>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="pdf" class="form-label">Upload PDF</label>
+                                    <input type="file" id="pdf" name="pdf" class="form-control">
+                                    @if($media = $page->getFirstMedia('page_pdf'))
+                                        <div class="position-relative" style="width:120px;">
+                                            <a href="{{ $media->getUrl() }}">View PDF</a>
                                             <div class="fs-17 text-white position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"
                                                 onclick="deleteFunction(`{{ route('page.image_destroy', ['page' => $page->id, 'gid' => $media->id]) }}`)"
                                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
@@ -96,7 +110,7 @@
 
                             <div class="mb-3">
                                 <label for="page_content" class="form-label">Page Content </label>
-                                <textarea name="page_content" id="page_content" class="form-control" rows="8">{{ old('page_content', $page->page_content) }}</textarea>
+                                <textarea name="page_content" id="page_content" class="form-control" rows="8">{!! old('page_content', $page->page_content) !!}</textarea>
                             </div>
                         </div>
 
