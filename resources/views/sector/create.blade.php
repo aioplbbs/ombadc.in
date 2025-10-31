@@ -24,6 +24,26 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="banner_id" class="form-label">Choose Banner</label>
+                                    <select name="gallery[banner_id]" class="form-select" id="banner_id">
+                                        <option value="">Choose Banner</option>
+                                        @foreach ($galleries as $gallery)
+                                        <option value="{{ $gallery->id }}">{{ $gallery->caption }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="gallery_id" class="form-label">Choose Gallery</label>
+                                    <select name="gallery[gallery_id]" class="form-select" id="gallery_id">
+                                        <option value="">Choose Gallery</option>
+                                        @foreach ($galleries as $gallery)
+                                        <option value="{{ $gallery->id }}">{{ $gallery->caption }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
                                 <div class="col-md-4">
                                     <label for="title" class="form-label">Seo Title</label>
                                     <input type="text" id="title" name="seo[title]" class="form-control" value="{{old('seo.title')}}">

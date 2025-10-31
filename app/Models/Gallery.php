@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Str;
 
 class Gallery extends Model implements HasMedia
@@ -17,18 +18,18 @@ class Gallery extends Model implements HasMedia
 
     protected static function booted()
     {
-        static::creating(function ($page) {
-            if (empty($page->slug)) {
-                $slug = Str::slug($page->name);
+        static::creating(function ($gallery) {
+            if (empty($gallery->slug)) {
+                $slug = Str::slug($gallery->caption);
                 $count = $a = 0;
                 do {
                     $count = Gallery::where('slug', $slug)->count();
                     if ($count > 0) {
                         $a++;
-                        $slug = Str::slug($page->name) . '-' . $a;
+                        $slug = Str::slug($gallery->caption) . '-' . $a;
                     }
                 } while ($count > 0);
-                $page->slug = $slug;
+                $gallery->slug = $slug;
             }
         });
     }
@@ -52,5 +53,15 @@ class Gallery extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('gallery');
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(400)
+            ->height(400)
+            ->sharpen(10)
+            ->performOnCollections('gallery')
+            ->nonQueued();
     }
 }

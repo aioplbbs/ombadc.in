@@ -52,6 +52,31 @@
                                 </div>
                             </div>
 
+                            @php
+                            $gallery_data = $sector->customData()->where('name', 'sector_data')->first()->data;
+                            @endphp
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="banner_id" class="form-label">Choose Banner</label>
+                                    <select name="gallery[banner_id]" class="form-select" id="banner_id">
+                                        <option value="">Choose Banner</option>
+                                        @foreach ($galleries as $gallery)
+                                        <option value="{{ $gallery->id }}">{{ $gallery->caption }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="gallery_id" class="form-label">Choose Photo</label>
+                                    <select name="gallery[gallery_id]" class="form-select" id="gallery_id">
+                                        <option value="">Choose Photo</option>
+                                        @foreach ($galleries as $gallery)
+                                        <option value="{{ $gallery->id }}">{{ $gallery->caption }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="row mb-3">
                                 <div class="col-md-4">
                                     <label for="title" class="form-label">Seo Title</label>
@@ -69,18 +94,21 @@
                                         value="{{ old('seo.description', $sector->seo['description'] ?? '') }}">
                                 </div>
                             </div>
+                            @php
+                            $sector_data = $sector->customData()->where('name', 'sector_data')->first()->data;
+                            @endphp
                             <div class="row mb-3">
                                 <div class="col-md-4">
                                     <label for="title" class="form-label">Sanctioned</label>
-                                    <input type="text" id="title" name="custom[sanctioned]" class="form-control" value="{{old('custom.sanctioned', $sector->custom->data['sanctioned']??'')}}">
+                                    <input type="text" id="title" name="custom[sanctioned]" class="form-control" value="{{old('custom.sanctioned', $sector_data['sanctioned']??'')}}">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="keywords" class="form-label">Released</label>
-                                    <input type="text" id="keywords" name="custom[released]" class="form-control" value="{{old('custom.released', $sector->custom->data['released']??'')}}">
+                                    <input type="text" id="keywords" name="custom[released]" class="form-control" value="{{old('custom.released', $sector_data['released']??'')}}">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="description" class="form-label">Utilized</label>
-                                    <input type="text" id="description" name="custom[utilized]" class="form-control" value="{{old('custom.utilized', $sector->custom->data['utilized']??'')}}">
+                                    <input type="text" id="description" name="custom[utilized]" class="form-control" value="{{old('custom.utilized', $sector_data['utilized']??'')}}">
                                 </div>
                             </div>
 

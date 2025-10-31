@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Page;
 use App\Http\Requests\PageRequest;
+use App\Models\Gallery;
 use Mews\Purifier\Facades\Purifier;
 use Str;
 
@@ -43,7 +44,10 @@ class SectorController extends Controller
             'items' => ["Home", "Sector"],
             'last_item' => "Add Sector"
         ];
-        return view('sector.create', compact('breadcrumb'));
+
+        $galleries = Gallery::where('status', 'Show')->get();
+
+        return view('sector.create', compact('breadcrumb', 'galleries'));
     }
 
     /**
@@ -59,6 +63,10 @@ class SectorController extends Controller
         $page->customData()->updateOrCreate(
             ['name' => 'sector_data'],
             ['data' => $request->input('custom', [])]
+        );
+        $page->customData()->updateOrCreate(
+            ['name' => 'gallery_data'],
+            ['data' => $request->input('gallery', [])]
         );
         if($request->hasFile('banner')){
             $file = $request->file('banner');
@@ -91,7 +99,9 @@ class SectorController extends Controller
             'last_item' => "Update Sector"
         ];
 
-        return view('sector.update', compact('sector', 'breadcrumb'));
+        $galleries = Gallery::where('status', 'Show')->get();
+
+        return view('sector.update', compact('sector', 'breadcrumb', 'galleries'));
     }
 
     /**
@@ -115,6 +125,10 @@ class SectorController extends Controller
         $sector->customData()->updateOrCreate(
             ['name' => 'sector_data'],
             ['data' => $request->input('custom', [])]
+        );
+        $sector->customData()->updateOrCreate(
+            ['name' => 'gallery_data'],
+            ['data' => $request->input('gallery', [])]
         );
 
         return redirect()->route('sector.index')->with('success', "Page Updated Successfully.");

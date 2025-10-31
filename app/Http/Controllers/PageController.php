@@ -29,7 +29,7 @@ class PageController extends Controller
             'items' => ["Home"],
             'last_item' => "Pages"
         ];
-        $pages = Page::whereNotIn('page_type', ['Sector'])->orderBy('id', 'desc')->paginate(20);
+        $pages = Page::whereNotIn('page_type', ['Sector'])->orderBy('id', 'desc')->get();
         return view('page.index', compact('pages', 'breadcrumb'));
     }
 

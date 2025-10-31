@@ -14,10 +14,10 @@
                         <!-- Simple card -->
                         <div class="card d-block">
                             @php
-                                $imageUrl = $value->getFirstMediaUrl('gallery') ?: asset('assets/images/small/small-1.jpg');
+                                $imageUrl = $value->getFirstMediaUrl('gallery', 'thumb') ?: asset('assets/images/small/small-1.jpg');
                             @endphp
 
-                            <img class="card-img-top" src="{{ $imageUrl }}" alt="{{ $value->caption }}">
+                            <img class="card-img-top" src="{{ $imageUrl }}" alt="{{ $value->caption }}" height="200">
 
                             <div class="card-body">
                                 <h5 class="card-title">{{ $value->caption }}</h5>

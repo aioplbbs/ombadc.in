@@ -105,7 +105,7 @@ return [
             'HTML.SafeIframe' => true,
             'URI.SafeIframeRegexp' => '%^(https?:)?//%',
             'HTML.Allowed' => '
-                section,div,span,h1,h2,h3,h4,h5,h6,p,br,hr,b,strong,i,u,em,a[href|title|target|class],
+                section,div,span,h1,h2,h3,h4,h5,h6,p,br,hr,b,strong,i,u,em,a[href|title|target|class|id],
                 ul,ol,li,img[src|alt|width|height|style|class],
                 table,tr,td,th,thead,tbody,tfoot,
                 style,blockquote,pre,code,

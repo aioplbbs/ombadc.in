@@ -15,13 +15,16 @@
         <div class="maain-meeting-grid">
         @if(!empty($page->sub_content))
         @foreach($page->sub_content as $value)
-        <a class="maain-meeting-grid-box" target="_blank" href="{{$value->getFirstMediaUrl('page_pdf')}}">
+        @php
+        $url = $value->customData()->where('name', 'custom_fields')->value('data');
+        @endphp
+        <a class="maain-meeting-grid-box" target="_blank" href="{{ $value->getFirstMediaUrl('page_pdf') ?: $url['url']??'' }}">
            <div>
             <img src="{{$value->getFirstMediaUrl('page_photo')}}" alt="image">
             <p class="meeting-caption">{{$value->name}}</p>
             <p class="meeting-date-caption"> </p>
             <p class="description-card"> {{$value->page_content}}</p>
-            <button class="read-all-doc" href="{{$value->getFirstMediaUrl('page_pdf')}}">Read</button>
+            <button class="read-all-doc" href="{{ $value->getFirstMediaUrl('page_pdf') ?: $url['url']??'' }}">Read</button>
            </div>
         </a>
         @endforeach

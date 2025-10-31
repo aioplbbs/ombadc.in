@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Mews\Purifier\Casts\CleanHtmlInput;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -68,7 +70,7 @@ class Page extends Model implements HasMedia
     {
         $page_type = $this->attributes['page_type'];
         $page_id = $this->attributes['id'];
-        return Page::where('page_type', $page_type)->where('id', '!=', $page_id)->get();
+        return Page::where('page_type', $page_type)->where('id', '!=', $page_id)->orderBy('id', 'desc')->get();
     }
 
     public function customData()
@@ -86,4 +88,21 @@ class Page extends Model implements HasMedia
     public function departments(){
         return $this->hasMany(Department::class, 'page_id');
     }
+
+    public function getGalleryInfoAttribute()
+    {
+        $custom = $this->customData()->where('name', 'gallery_data')->first();
+
+        if (! $custom) {
+            return 'null';
+        }
+
+        $data = $custom->data;
+
+        return [
+            'gallery' => Gallery::find($data['gallery_id'] ?? null),
+            'banner'  => Gallery::find($data['banner_id'] ?? null),
+        ];
+    }
+
 }

@@ -57,7 +57,7 @@ class FrontController extends Controller
 
     public function page($slug = '')
     {
-        if($page = Page::with('customData')->where('slug', $slug)->first()){
+        if($page = Page::where('slug', $slug)->first()){
             $menus = [];
             $setting = Setting::where('name', 'menu')
             ->with(['menus' => function($q){

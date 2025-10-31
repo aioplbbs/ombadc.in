@@ -1,9 +1,9 @@
 @if (!empty($page->getMedia('page_banner')))
-
 <section class="section banner">
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         @php
+        $sector_data = $page->customData()->where('name', 'sector_data')->first()->data;
         $i=0;
         @endphp
         @foreach($page->getMedia('page_banner') as $banner)
@@ -58,9 +58,6 @@
             </script>
             
             </div>
-            @php
-            $sector_data = $page->customData->data;
-            @endphp
         <div class="col-lg-5 col-md-12">
             <div class="counter-content">
             <div id='containertfgh'>
@@ -99,3 +96,106 @@
     </div>
     </div>
 </section>
+<section class="section">
+        <div id="container-fluid">
+          <div id="toggleContainer">
+
+            <div id="toggle">
+              <div id="outer3">
+
+              </div>
+
+            </div>
+          </div>
+          <div id="galleryView">
+            <div id="galleryContainer">
+              <div id="left-leftView"></div>
+              <div id="leftView"></div>
+              <button id="navLeft" class="navBtns"><i class="fas fa-arrow-left fa-3x"></i></button>
+              <a id="linkTag">
+                <div id="mainView"></div>
+              </a>
+              <div id="rightView"></div>
+              <div id="right-rightView"></div>
+              <button id="navRight" class="navBtns"><i class="fas fa-arrow-right fa-3x"></i></button>
+            </div>
+          </div>
+          <div id="tilesView">
+            <div id="tilesContainer"></div>
+          </div>
+        </div>
+      </section>
+
+<script>
+    let imgObject = [
+        @foreach($page->getMedia('page_photo') as $gallery)
+            "{{$gallery->getUrl()}}"
+        @endforeach
+    ];
+
+      let mainImg = 0;
+      let prevprevImg = imgObject.length - 2;
+      let prevImg = imgObject.length - 1;
+      let nextImg = 1;
+      let nextnextImg = 2;
+
+      function loadGallery() {
+
+        let mainView = document.getElementById("mainView");
+        mainView.style.background = "url(" + imgObject[mainImg] + ")center center / cover no-repeat";
+
+        let left_leftView = document.getElementById("left-leftView");
+        left_leftView.style.background = "url(" + imgObject[prevprevImg] + ")";
+
+        let leftView = document.getElementById("leftView");
+        leftView.style.background = "url(" + imgObject[prevImg] + ")";
+
+        let right_rightView = document.getElementById("right-rightView");
+        right_rightView.style.background = "url(" + imgObject[nextnextImg] + ")";
+
+        let rightView = document.getElementById("rightView");
+        rightView.style.background = "url(" + imgObject[nextImg] + ")";
+
+        let linkTag = document.getElementById("linkTag")
+        linkTag.href = imgObject[mainImg];
+
+      };
+
+      function scrollRight() {
+
+        prevImg = mainImg;
+        mainImg = nextImg;
+        if (nextImg >= (imgObject.length - 1)) {
+          nextImg = 0;
+        } else {
+          nextImg++;
+        };
+        loadGallery();
+      };
+
+      function scrollLeft() {
+        nextImg = mainImg
+        mainImg = prevImg;
+
+        if (prevImg === 0) {
+          prevImg = imgObject.length - 1;
+        } else {
+          prevImg--;
+        };
+        loadGallery();
+      };
+
+      document.getElementById("navRight").addEventListener("click", scrollRight);
+      document.getElementById("navLeft").addEventListener("click", scrollLeft);
+      document.getElementById("rightView").addEventListener("click", scrollRight);
+      document.getElementById("leftView").addEventListener("click", scrollLeft);
+      document.addEventListener('keyup', function(e) {
+        if (e.keyCode === 37) {
+          scrollLeft();
+        } else if (e.keyCode === 39) {
+          scrollRight();
+        }
+      });
+
+      loadGallery();
+</script>

@@ -28,7 +28,7 @@
                             @foreach($gallery->getMedia('gallery') as $value)
                             <div class="col-md-1 me-1" style="border:1px solid lightgray;box-shadow: rgba(99, 99, 99, 0.2) 0px 1px 4px 0px;">
                                 <div style="width:100%;height:70%;">
-                                <img src="{{$value->getUrl()}}" alt="{{$gallery->caption}}" class="img-fluid" style="height:100%; width:100%;object-fit:contain;">
+                                <img src="{{$value->getUrl('thumb')}}" alt="{{$gallery->caption}}" class="img-fluid" style="height:100%; width:100%;object-fit:contain;">
                                 </div>
                                 <div class="fs-20 text-danger d-flex justify-content-center"
                                     onclick="deleteFunction(`{{ route('gallery.image_destroy', ['gallery' => $gallery->id, 'gid' => $value->id]) }}`)"
