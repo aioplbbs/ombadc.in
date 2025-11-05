@@ -24,7 +24,7 @@
                         <div class="staff_card-1">                          
                             <div class="staff_info">
                                 <div class="staff_image">
-                                    <img src="images/oversight.jpg" alt="" class="card-img-top" />
+                                    <img src="https://www.ombadc.in/images/oversight.jpg" alt="" class="card-img-top" />
                                 </div>
                                 <div class="staff_name_container padd19px">
                                     <div class="staff_name">
@@ -121,7 +121,7 @@
 							   
 								<div class="staff_info">
 									<div class="staff_image1">
-										<img src="images/GMs/Shri-Jayant-Kumar-Das.jpg" class="card-img-top" />
+										<img src="https://www.ombadc.in/images/GMs/Shri-Jayant-Kumar-Das.jpg" class="card-img-top" />
 									</div>
 									<div class="staff_name_container1">
 										<div class="staff_name smallfont">
@@ -141,7 +141,7 @@
 										<img src="images/profile_images/shri-sudhakar-burgi.png" class="card-img-top" />
 									</div> -->
 									<div class="staff_image1">
-										<img src="images/GMs/no-photo.jpg" class="card-img-top" />
+										<img src="https://www.ombadc.in/images/GMs/no-photo.jpg" class="card-img-top" />
 									</div>
 									<div class="staff_name_container1">
                                         <!-- 										
@@ -163,7 +163,7 @@
 								
 								<div class="staff_info">
 									<div class="staff_image1">
-										<img src="images/GMs/Shri-Bhabani-Prasad-Das(GM-Finance).jpg" class="card-img-top" />
+										<img src="https://www.ombadc.in/images/GMs/Shri-Bhabani-Prasad-Das(GM-Finance).jpg" class="card-img-top" />
 									</div>
 									<div class="staff_name_container1">
 									   
@@ -230,7 +230,122 @@
 	</div>
 </section>
 
+	<div id="popup2" class="overlay1">
+        <div class="popup-organogram">
+            <a class="close" href="#section" id="section2">&times;</a>
+            <div class="bod-image-organogram">
+                <div class="bod-first"> 
+                    @foreach($personal_profiles as $personal_profile)
+					@php
+						$imageUrl = $personal_profile->getFirstMediaUrl('personal-profile');
+					@endphp
+                    <div class="card" style="width:150px;height: 150px !important;">
+                        <div class="card-img" style="margin:0;border-radius:10%; box-shadow: none; text-align:center"> 
+                            <img style=" width:70%;border-radius:10%;box-shadow: none;border:1px solid lightgreen" src="{{ $imageUrl }}" alt="{{ $personal_profile->name }}" title="{{ $personal_profile->name }} ({{ $personal_profile->designation }})" />
+                            <p style="text-align:center ; font-weight: bold;box-shadow: none;line-height:20px">{{ $personal_profile->name }}</p>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup3" class="overlay2">
+        <div class="popup-organogram">
+            <a class="close" href="#section" id="section3">&times;</a>
+            <div class="bod-image-organogram">
+                <div class="bod-first"> 
+                    @foreach($personal_profiles as $personal_profile)
+					@php
+						$imageUrl = $personal_profile->getFirstMediaUrl('personal-profile');
+					@endphp
+                    <div class="card" style="height: 220px !important;">
+                        <div class="card-img" style="margin:0;border-radius:10%; box-shadow: none; text-align:center"> 
+                            <a href="pmu.php#pp_{{ $personal_profile->name }}">
+                                <img style=" width:70%;border-radius:10%;box-shadow: none;border:1px solid lightgreen"  src="{{ $imageUrl }}" alt="{{ $personal_profile->name }}" title="{{ $personal_profile->name }} ({{ $personal_profile->designation }})" />
+                                <p style="text-align:center ; font-weight: bold;box-shadow: none;">{{ $personal_profile->name }}</p>
+                                <p style="text-align:center; padding:0; line-height:13px">{{ $personal_profile->designation }}</p>
+                            </a>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+
     @push('script')
-    
+    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <!-- Popper JS -->
+    <script src="assets/js/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Plugins JS -->
+    <script src="assets/js/plugins.js"></script>
+    <!-- Ajax Mail -->
+    <script src="assets/js/ajax-mail.js"></script>
+    <script>
+        new WOW().init();
+        $('.reset').click(function(){
+            new WOW().init();
+        })
+    </script>
+    <!-- Main JS -->
+    <script src="assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="assets/js/mdb.min.js"></script>
+    <div class="d-none">
+        <script type="text/javascript" src="assets/js/mdbFsscroller.min.js"></script>
+    </div>
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop: false,
+            margin: 10,
+            nav: true,
+            responsive: {
+	            0: {
+	                items: 1
+	            },
+	            600: {
+	                items: 1
+	            },
+	            1000: {
+	                items: 3
+	            }
+            }
+        })
+    </script>
+    <script>
+        $(document).scroll(function() {
+            if ( $(this).scrollTop() > 10 ) {
+                $('.sml-logo').show('slow');
+                $('.logo-main').addClass('logo-white-bg');
+                $('.new-logo').hide('slow');
+            } else {
+                $('.sml-logo').hide('slow');
+                $('.logo-main').removeClass('logo-white-bg');
+                $('.new-logo').show('slow');
+            }
+        }); 
+        $(document).ready(function(){
+	        $('#popup2d').hover(function(){ 
+                console.log("Hello");
+    	        $('#popup2').show();
+	        });
+	        $('#popup3d').hover(function(){ 
+    	        $('#popup3').show();
+	        });
+            $('#section2').click(function(){ 
+                $('#popup2').hide();
+            });
+            $('#section3').click(function(){ 
+                $('#popup3').hide();
+            });
+        });
+    </script>
     @endpush
 </x-front-layout>

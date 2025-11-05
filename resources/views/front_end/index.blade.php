@@ -145,16 +145,17 @@
           @endphp
           @foreach ($banners as $banner)
             @php
-              $name = $banner['custom_properties']['name'] ?? '';
+              $name = $banner->caption;
+              $media = $banner->getFirstMedia('banner');
             @endphp
 
-            @if (!str_starts_with($banner['mime_type'], 'image/'))
+            @if (!str_starts_with($media->mime_type, 'image/'))
               <div class="carousel-item @if($i==0){{'active'}}@endif data-bs-interval="17500">
-                <video id="bannerVideo" src="{{$banner['original_url']}}" autoplay muted loop></video>
+                <video id="bannerVideo" src="{{$media->getUrl()}}" autoplay muted loop></video>
               </div>
             @else
               <div class="carousel-item @if($i==0) {{'active'}} @endif">
-                <img src="{{$banner['original_url']}}" class="d-block w-100" alt="..." data-bs-interval="5000">  
+                <img src="{{$media->getUrl()}}" class="d-block w-100" alt="..." data-bs-interval="5000">  
                 @if($name != '')
                   <div class="carousel-caption d-none d-md-block">
                     <h5 class="caption-banner caption-gsap">{{$name}}</h5>
@@ -936,7 +937,7 @@
                   <div class="single-our-blog social-gsap">
                     <div class="our-blog-image">
                       <a href="{{ route('home') }}">
-                        <img src="https://www.ombadc.in/images/service/DSC_53311.JPG" alt="{{ $name }}"> 
+                        <img src="{{ $sector->gallery_info['gallery']->getFirstMediaUrl('gallery') }}" alt="{{ $name }}"> 
                       </a>
                     </div>
                     <div class="our-blog-contnet">
@@ -1123,11 +1124,11 @@
     <script src="https://www.ombadc.in/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script type="text/javascript" charset="UTF-8" src="https://www.gstatic.com/charts/51/loader.js"></script>
     <script src="https://www.ombadc.in/assets/js/charts.js?v2"></script>
-    <script src="https://www.ombadc.in/assets/js/exporting.js"></script>
+    <script src="https://www.ombadc.office.aio.in/assets/js/exporting.js"></script>
     <script type="text/javascript" src="https://www.ombadc.in/assets/js/chartsloader.js"></script>
     <script src="https://www.ombadc.in/assets/js/main.js"></script>
     <script src="https://www.ombadc.in/assets/js/plugins.js"></script>
-    <script src="https://www.ombadc.in/assets/js/popper.min.js"></script>
+    <script src="https://www.ombadc.office.aio.in/assets/js/popper.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://www.ombadc.in/assets/js/bootstrap.min.js"></script>
     <!-- Plugins JS -->

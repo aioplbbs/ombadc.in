@@ -88,9 +88,13 @@ class PersonalProfileController extends Controller
     public function update(PersonalProfileRequest $request, PersonalProfile $personalProfile)
     {
         $data=$request->all();
+        $media = $personalProfile->getFirstMedia('personal-profile');
         if($request->hasFile('profile_image')){
+            if($media){
+                $media->delete();
+            }
             $file = $request->file('profile_image');
-            $personalProfile->addMedia($file)->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())->toMediaCollection('gallery');
+            $personalProfile->addMedia($file)->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())->toMediaCollection('personal-profile');
         }
         $personalProfile->update($data);
         return redirect()->route('personal-profile.index')->with('success','Personal profile updated successfully.');

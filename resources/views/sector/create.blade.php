@@ -28,8 +28,8 @@
                                     <label for="banner_id" class="form-label">Choose Banner</label>
                                     <select name="gallery[banner_id]" class="form-select" id="banner_id">
                                         <option value="">Choose Banner</option>
-                                        @foreach ($galleries as $gallery)
-                                        <option value="{{ $gallery->id }}">{{ $gallery->caption }}</option>
+                                        @foreach ($banners as $banner)
+                                        <option value="{{ $banner->id }}">{{ $banner->caption }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -70,6 +70,10 @@
                                     <label for="description" class="form-label">Utilized</label>
                                     <input type="text" id="description" name="custom[utilized]" class="form-control" value="{{old('custom.utilized')}}">
                                 </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="short_description" class="form-label"> Short Description </label>
+                                <textarea name="custom[short_description]" id="short_description" class="form-control" rows="4">{{old('short_description')}}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="page_content" class="form-label">Page Content </label>

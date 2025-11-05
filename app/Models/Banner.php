@@ -13,6 +13,8 @@ class Banner extends Model implements HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
+    protected $fillable = ['caption'];
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('banner');

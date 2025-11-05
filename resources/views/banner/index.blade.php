@@ -20,18 +20,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if(!empty($data->getMedia('banner')))
-                            @foreach($data->getMedia('banner') as $key => $media)
+                            @if(!empty($data))
+                            @foreach($data as $key => $media)
+                            @php
+                            $file = $media->getFirstMedia('banner');
+                            
+                            @endphp
                             <tr>
                                 <td>
-                                    <a href="{{ $media->getUrl() }}" target="_blank"><img src="{{ $media->getUrl('thumb') }}" width="300" class="me-lg-2 d-flex" alt="{{ $media->name }}"></a>
+                                    <a href="{{ $media->getFirstMediaUrl('banner') }}" target="_blank"><img src="{{ $media->getFirstMediaUrl('banner', 'thumb') }}" width="300" class="me-lg-2 d-flex" alt="{{ $media->caption }}"></a>
                                 </td>
-                                <td>{{ $media->getCustomProperty('name') }}</td>
+                                <td>{{ $media->caption }}</td>
                                 <td>
-                                    @if($media->getCustomProperty('status') == 'Show')
-                                    <span class="badge bg-primary">{{ $media->getCustomProperty('status') }}</span>
+                                    @if($file?->getCustomProperty('status') == 'Show')
+                                    <span class="badge bg-primary">{{ $file?->getCustomProperty('status') }}</span>
                                     @else
-                                    <span class="badge bg-danger">{{ $media->getCustomProperty('status') }}</span>
+                                    <span class="badge bg-danger">{{ $file?->getCustomProperty('status') }}</span>
                                     @endif
                                 </td>
                                 <td class="text-center text-muted">

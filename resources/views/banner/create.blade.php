@@ -14,8 +14,8 @@
                             <input type="text" id="name" name="name" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label for="name" class="form-label">Banner</label>
-                            <input type="file" id="name" name="banner" class="form-control">
+                            <label for="name" class="form-label">Banners</label>
+                            <input type="file" id="name" name="banner[]" class="form-control" multiple>
                         </div>
                     </div>
                     <div class="col-xl-3"></div>

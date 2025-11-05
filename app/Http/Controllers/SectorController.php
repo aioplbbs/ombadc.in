@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use Illuminate\Http\Request;
 use App\Models\Page;
 use App\Http\Requests\PageRequest;
@@ -46,8 +47,9 @@ class SectorController extends Controller
         ];
 
         $galleries = Gallery::where('status', 'Show')->get();
+        $banners = Banner::where('caption','<>','home-banner')->get();
 
-        return view('sector.create', compact('breadcrumb', 'galleries'));
+        return view('sector.create', compact('breadcrumb', 'galleries', 'banners'));
     }
 
     /**
@@ -100,8 +102,9 @@ class SectorController extends Controller
         ];
 
         $galleries = Gallery::where('status', 'Show')->get();
+        $banners = Banner::where('caption','<>','home-banner')->get();
 
-        return view('sector.update', compact('sector', 'breadcrumb', 'galleries'));
+        return view('sector.update', compact('sector', 'breadcrumb', 'galleries', 'banners'));
     }
 
     /**

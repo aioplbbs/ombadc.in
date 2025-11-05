@@ -12,19 +12,18 @@
       <meta property="og:url" content="https://ombadc.in">
       <meta name="keywords" content="Odisha, govt, state Government, ombadc, OMBADC,Odisha Mineral Bearing Areas Development Corporation (OMBADC),Public Limited Government Company, tribal">
       <link rel="icon" type="image/x-icon" href="https://www.ombadc.in/images/favicon.ico">
-      <link href="{{asset('/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
-      <link rel="stylesheet" href="https://www.ombadc.in/assets/css/bootstrap.min.css">
-      <link rel="stylesheet" href="https://www.ombadc.in/assets/css/material-design-iconic-font.min.css">
-      <link rel="stylesheet" href="https://www.ombadc.in/assets/css/plugins.css">
+      <link rel="stylesheet" href="{{frontAsset('assets/css/bootstrap.min.css')}}">
+      <link rel="stylesheet" href="{{frontAsset('assets/css/material-design-iconic-font.min.css')}}">
+      <link rel="stylesheet" href="{{frontAsset('assets/css/plugins.css')}}">
 
       <link rel="stylesheet" href="https://www.ombadc.in/assets/css/style.css">
       <!-- <link rel="stylesheet" href="/assets/css/responsive.css"> -->
-      <link rel="stylesheet" href="https://www.ombadc.in/assets/css/owl.css">
-      <link href="https://www.ombadc.in/assets/css/all.min.css" rel="stylesheet">
-      <link rel="stylesheet" href="https://www.ombadc.in/assets/css/owl.theme.default.css" />
-      <link href="https://www.ombadc.in/assets/css/fsscroller.min.css" rel="stylesheet" />
-      <script src="https://www.ombadc.in/assets/js/jquery.min.js"></script>
-      <script src="https://www.ombadc.in/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+      <link rel="stylesheet" href="{{frontAsset('assets/css/owl.css')}}">
+      <link href="{{frontAsset('assets/css/all.min.css')}}" rel="stylesheet">
+      <link rel="stylesheet" href="{{frontAsset('assets/css/owl.theme.default.css')}}" />
+      <link href="{{frontAsset('assets/css/fsscroller.min.css')}}" rel="stylesheet" />
+      <script src="{{frontAsset('assets/js/jquery.min.js')}}"></script>
+      <script src="{{frontAsset('assets/js/vendor/modernizr-3.6.0.min.js')}}"></script>
       
       <style>
         /* Add this CSS to style the tooltip */
@@ -325,7 +324,7 @@
                                       <a href="<?= 3 ?>"><img src="https://www.ombadc.in/images/logo.png" class="sticky_logo"></a>
                                     </div>
                                     <ul>
-                                      <li class="menu-gsap menuleft">&nbsp;</li><li class="menu-gsap"><a href="{{route('home')}}">Home</a></li>
+                                      <li class="menu-gsap"><a href="{{route('home')}}">Home</a></li>
                                       @if(!empty($menus['Navbar']))
                                         @include('front_end.menu', ['items' => $menus['Navbar']])
                                       @endif
@@ -451,6 +450,19 @@
   }
   });
   
+</script>
+<script>
+$(document).scroll(function() {
+if ( $(this).scrollTop() > 10 ) {
+$('.sml-logo').show('slow');
+$('.logo-main').addClass('logo-white-bg');
+$('.new-logo').hide('slow');
+} else {
+$('.sml-logo').hide('slow');
+$('.logo-main').removeClass('logo-white-bg');
+$('.new-logo').show('slow');
+}
+}); 
 </script>
   <script>
   const apiKey = '77c967783ac68de6cc13f0854316ed9d';

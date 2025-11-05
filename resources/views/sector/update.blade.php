@@ -53,7 +53,7 @@
                             </div>
 
                             @php
-                            $gallery_data = $sector->customData()->where('name', 'sector_data')->first()->data;
+                            $gallery_data = $sector->customData()->where('name', 'gallery_data')->first()->data;
                             @endphp
 
                             <div class="row mb-3">
@@ -61,17 +61,17 @@
                                     <label for="banner_id" class="form-label">Choose Banner</label>
                                     <select name="gallery[banner_id]" class="form-select" id="banner_id">
                                         <option value="">Choose Banner</option>
-                                        @foreach ($galleries as $gallery)
-                                        <option value="{{ $gallery->id }}">{{ $gallery->caption }}</option>
+                                        @foreach ($banners as $banner)
+                                        <option value="{{ $banner->id }}" {{ !empty($gallery_data) && $gallery_data['banner_id']==$banner->id ? 'selected' : '' }}>{{ $banner->caption }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="gallery_id" class="form-label">Choose Photo</label>
+                                    <label for="gallery_id" class="form-label">Choose Gallery</label>
                                     <select name="gallery[gallery_id]" class="form-select" id="gallery_id">
-                                        <option value="">Choose Photo</option>
+                                        <option value="">Choose Gallery</option>
                                         @foreach ($galleries as $gallery)
-                                        <option value="{{ $gallery->id }}">{{ $gallery->caption }}</option>
+                                        <option value="{{ $gallery->id }}" {{ !empty($gallery_data) && $gallery_data['gallery_id']==$gallery->id ? 'selected' : '' }}>{{ $gallery->caption }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -111,7 +111,10 @@
                                     <input type="text" id="description" name="custom[utilized]" class="form-control" value="{{old('custom.utilized', $sector_data['utilized']??'')}}">
                                 </div>
                             </div>
-
+                            <div class="mb-3">
+                                <label for="short_description" class="form-label"> Short Description </label>
+                                <textarea name="custom[short_description]" id="short_description" class="form-control" rows="4">{{old('short_description', $sector_data['short_description']??'')}}</textarea>
+                            </div>
                             <div class="mb-3">
                                 <label for="page_content" class="form-label">Page Content </label>
                                 <textarea name="page_content" id="page_content" class="form-control" rows="8">{{ old('page_content', $sector->page_content) }}</textarea>

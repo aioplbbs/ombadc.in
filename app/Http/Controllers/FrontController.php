@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Department;
 use App\Models\District;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ use App\Models\Notice;
 use App\Models\Faculty;
 use App\Models\Setting;
 use App\Models\Gallery;
+use App\Models\PersonalProfile;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class FrontController extends Controller
@@ -32,8 +34,10 @@ class FrontController extends Controller
             }
         }
 
-        $setting = Setting::where('name', 'banner')->first();
-        $banners = $setting->getMedia('banner')->filter(fn($media) => $media->getCustomProperty('status') === 'Show')->toArray();
+        $setting = Banner::where('caption', 'Homepage')->get();
+        // dd($setting);
+        
+        $banners = $setting;
         $notice = Notice::where('status', 'Show')->orderBy('notice_publish', 'desc')->get();
         $galleries = Media::where('collection_name', 'gallery')
             ->orderBy('created_at', 'desc')  // optional: latest first
@@ -127,11 +131,13 @@ class FrontController extends Controller
             }
         }
 
+        $departments = Department::all();
+
         if(!empty($slug) && $gallery = Gallery::where('slug', $slug)->first()){
-            return view('front_end.gallery', compact('menus', 'gallery'));
+            return view('front_end.gallery', compact('menus', 'gallery', 'departments', 'slug'));
         }else{
             $galleries = Gallery::get();
-            return view('front_end.gallery', compact('menus', 'galleries'));
+            return view('front_end.gallery', compact('menus', 'galleries', 'departments', 'slug'));
         }
     }
 
@@ -248,7 +254,98 @@ class FrontController extends Controller
         }
 
         $departments = Department::all();
+        $personal_profiles = PersonalProfile::all();
 
-        return view('front_end.organogram', compact('menus', 'departments'));
+        return view('front_end.organogram', compact('menus', 'departments', 'personal_profiles'));
+    }
+
+    public function whosWho(){
+        $menus = $notices = [];
+        $setting = Setting::where('name', 'menu')
+            ->with(['menus' => function($q){
+                $q->whereNull('parent_id')->orderBy('position', 'asc')->with('children');
+            }])->get();
+        
+        $area_overview = Setting::where('name', 'area_overview')->first();
+
+
+        if(!empty($setting)){
+            foreach ($setting as $value) {
+                $menus[$value->data['name']] = $this->buildMenuTree($value->menus);
+            }
+        }
+
+        $departments = Department::all();
+        $personal_profiles = PersonalProfile::all();
+
+        return view('front_end.whos-who', compact('menus', 'departments', 'personal_profiles'));
+    }
+
+    public function pmu(){
+        $menus = $notices = [];
+        $setting = Setting::where('name', 'menu')
+            ->with(['menus' => function($q){
+                $q->whereNull('parent_id')->orderBy('position', 'asc')->with('children');
+            }])->get();
+        
+        $area_overview = Setting::where('name', 'area_overview')->first();
+
+
+        if(!empty($setting)){
+            foreach ($setting as $value) {
+                $menus[$value->data['name']] = $this->buildMenuTree($value->menus);
+            }
+        }
+
+        $departments = Department::all();
+        $personal_profiles = PersonalProfile::where('staff_category', 'PMU')->get();
+
+        return view('front_end.pmu', compact('menus', 'departments', 'personal_profiles'));
+    }
+
+    public function tenders(){
+        $menus = $notices = [];
+        $setting = Setting::where('name', 'menu')
+            ->with(['menus' => function($q){
+                $q->whereNull('parent_id')->orderBy('position', 'asc')->with('children');
+            }])->get();
+        
+        $area_overview = Setting::where('name', 'area_overview')->first();
+
+
+        if(!empty($setting)){
+            foreach ($setting as $value) {
+                $menus[$value->data['name']] = $this->buildMenuTree($value->menus);
+            }
+        }
+
+        $departments = Department::all();
+        $tenders = Notice::whereJsonContains('notice_category', 'Tender')->get();
+
+        return view('front_end.tender', compact('menus', 'departments', 'tenders'));
+    }
+
+    public function rti(){
+        $menus = $notices = [];
+        $setting = Setting::where('name', 'menu')
+            ->with(['menus' => function($q){
+                $q->whereNull('parent_id')->orderBy('position', 'asc')->with('children');
+            }])->get();
+        
+        $area_overview = Setting::where('name', 'area_overview')->first();
+
+
+        if(!empty($setting)){
+            foreach ($setting as $value) {
+                $menus[$value->data['name']] = $this->buildMenuTree($value->menus);
+            }
+        }
+
+        $departments = Department::all();
+        $sectors = Page::with('departments.projects')->where('page_type', 'Sector')->orderBy('id', 'desc')->get();
+
+        // dd($sectors);
+
+        return view('front_end.rti', compact('menus', 'departments', 'sectors'));
     }
 }

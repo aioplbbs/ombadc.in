@@ -1,10 +1,7 @@
 <x-front-layout :menus="$menus">
-<!-- <div class="inner-banner">
-    <img src="{{frontAsset('/assets/image/innerbanner.jpg')}}" alt="" width="100%" />
-    <p class="inner-banner__text"><a href="">Home</a> <i class="fa-solid fa-angles-right"></i> {{$page->name}}</p>
-</div> -->
+
 @push('style')
-<style>
+    <style>
     #morex,
     #morex1,
     #morex3,
@@ -191,38 +188,38 @@
       margin-top: 15px;
     }
   </style>
-@endpush
+    @endpush
 
+    <section class="section banner">
+      <div class="bg-banner" style="background-image: url('https://www.ombadc.in/images/innerbanner/history.jpg');background-size: cover;">
+        <div class="b-title">
+          <ul class="b-menu">
+            <li class="b-item"><a href="https://ombadc.office.aio.in/">Home</a></li>
+            <li class="b-item"><a class="active">Tender</a></li>
+          </ul>
+          <h3> Tender </h3>
+        </div>
+      </div>
+    </section>
 
-    @switch($page->page_type)
-      @case('Sector')
-        @include('front_end.pages.sector')
-        @break
-      @case('Annual Reports')
-        @include('front_end.pages.card-list', ['bread' => 'Publication'])
-        @break
-      @case('Brochures')
-        @include('front_end.pages.card-list', ['bread' => 'Publication'])
-        @break
-      @case('Articles')
-        @include('front_end.pages.card-list', ['bread' => 'Publication'])
-        @break
-      @case('Success Story')
-        @include('front_end.pages.card-list', ['bread' => 'Publication'])
-        @break
-      @case('Downloads')
-        @include('front_end.pages.card-list')
-        @break
-      @case('Orders')
-        @include('front_end.pages.card-list', ['bread' => 'About Us'])
-        @break
-      @case('Guidelines')
-        @include('front_end.pages.card-list', ['bread' => 'About Us'])
-        @break
-      @case('None')
-        {!! $page->page_content !!}
-        @break
-    @endswitch
+    <section class="section">
+        <div class="maain-meeting-grid">
+            @foreach($tenders as $tender)
+                <a class="maain-meeting-grid-box" target="_blank" href="{{ $tender->notice_type == 'Link' ? $tender->custom_data['web_link'] : '' }}">
+                    <div >
+                        <img src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" alt="image">
+                        <p class="meeting-caption">
+                            <span class="tender-no">{{ $tender->id }}<br></span>
+                            {{ $tender->notice_name }} {!! $tender->notice_blink == 'Yes' ? '<img src="https://www.ombadc.in/images/new.gif" alt="New" border="0" align="absmiddle"/>' : '' !!}
+                            
+                        </p>
+                        <p class="pub-date">PUBLISH DATE <br><span><?=date("d/m/Y", strtotime($tender->notice_publish))?></span></p>
+                        <p class="exp-date">EXPIRY DATE <br><span><?=date("d/m/Y", strtotime($tender->notice_publish))?></span></p>
+                    </div>
+                </a>
+            @endforeach
+        </div>
+    </section>
 
 @push('script')
   <script data-cfasync="false" src="https://www.ombadc.in/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>

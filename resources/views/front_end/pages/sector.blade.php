@@ -1,12 +1,15 @@
-@if (!empty($page->getMedia('page_banner')))
+@php
+$banner = $page->gallery_info['banner'];
+$sector_data = $page->customData()->where('name', 'sector_data')->first()->data;
+@endphp
+@if (!empty($banner))
 <section class="section banner">
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         @php
-        $sector_data = $page->customData()->where('name', 'sector_data')->first()->data;
         $i=0;
         @endphp
-        @foreach($page->getMedia('page_banner') as $banner)
+        @foreach($banner->getMedia('banner') as $banner)
             <div class="carousel-item @if($i == 0){{'active'}} @endif">
                 <img src="{{$banner->getUrl()}}" class="d-block w-100" alt="...">
             </div>
@@ -24,7 +27,18 @@
     </div>
 </section>
 @else
-
+<section class="section banner">
+      <div class="bg-banner" style="background-image: url('https://www.ombadc.in/images/innerbanner/history.jpg');background-size: cover;">
+        <div class="b-title">
+          <ul class="b-menu">
+            <li class="b-item"><a href="https://ombadc.office.aio.in/">Home</a></li>
+            <li class="b-item"><a href="javascript:void(0)">Sector</a></li>                        
+            <li class="b-item"><a class="active">{{$page->name}}</a></li>
+          </ul>
+          <h3> {{$page->name}} </h3>
+        </div>
+      </div>
+    </section>
 @endif
 
 <section class="section counter-section">
@@ -33,7 +47,9 @@
         <div class="row">
         <div class="col-lg-7 col-md-12 purpose-left" style="background-color: #92dcab; overflow-y: hidden; ">
             <h3 class="boldh3">{{ $page->name }}</h3> 
-            {!! $page->page_content !!}
+            <p class="scrollable" id="scrollableText9">{{ $sector_data['short_description'] }}<span id="dots9"> ...</span>
+              <span id="morex9">{!! $page->page_content !!}</span>
+            </p>
             <button class="btn-readmore" onClick="toggleReadMore9()" id="moreBtn9">Read more ...</button>
 
             <script>
@@ -125,11 +141,20 @@
           </div>
         </div>
       </section>
+      @php
+      $gallery = $page->gallery_info['gallery'];
+      @endphp
 
 <script>
     let imgObject = [
-        @foreach($page->getMedia('page_photo') as $gallery)
-            "{{$gallery->getUrl()}}"
+        @php
+        $i=0;
+        @endphp
+        @foreach($gallery->getMedia('gallery') as $media)
+            "{{$media->getUrl()}}",
+            @php
+            $i++;
+            @endphp
         @endforeach
     ];
 

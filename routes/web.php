@@ -39,11 +39,15 @@ Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/pages/{slug}', [FrontController::class, 'page'])->name('pages');
 Route::get('/faculties/{slug}', [FrontController::class, 'faculty']);
 Route::get('/profile/{slug}', [FrontController::class, 'profile']);
-Route::get('/galleries/{slug?}', [FrontController::class, 'gallery']);
+Route::get('/galleries/{slug?}', [FrontController::class, 'gallery'])->name('galleries');
 Route::get('/all/{slug}', [FrontController::class, 'all']);
 Route::get('/history', [FrontController::class, 'history']);
 Route::get('/purpose-of-spv', [FrontController::class, 'purpose']);
 Route::get('/organogram', [FrontController::class, 'organogram']);
+Route::get('/whos-who', [FrontController::class, 'whosWho']);
+Route::get('/pmu', [FrontController::class, 'pmu']);
+Route::get('/tender', [FrontController::class, 'tenders']);
+Route::get('/rti', [FrontController::class, 'rti']);
 
 Route::get('/setup', [SetupController::class, 'index']);
 Route::post('/setup', [SetupController::class, 'create'])->name('setup.init');
@@ -51,6 +55,7 @@ Route::post('/setup', [SetupController::class, 'create'])->name('setup.init');
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard']);
     Route::resource('/banner', BannerController::class);
+    Route::delete('/banner/{banner}/image-destroy/{gid}', [BannerController::class, 'imageDestroy'])->name('banner.image_destroy');
     Route::resource('/notice', NoticeController::class)->except(['show']);
     Route::resource('/gallery', GalleryController::class)->except(['show']);
     Route::delete('/gallery/{gallery}/image-destroy/{gid}', [GalleryController::class, 'imageDestroy'])->name('gallery.image_destroy');

@@ -24,7 +24,7 @@ class NoticeRequest extends FormRequest
         $rules = [
             'notice_name' => 'required|regex:/^[A-Za-z0-9\s()-.]+$/|max:250',
             'notice_category'   => 'required|array',
-            'notice_category.*' => 'in:Latest News,News & Event,Notices',
+            'notice_category.*' => 'in:Latest News,News & Event,Notices,Tender',
             'notice_type'       => 'required|in:Upload File,Link',
             'notice_open_in'    => 'required|in:New,Same',
             'notice_blink'      => 'required|in:Yes,No',

@@ -10,7 +10,7 @@
         </li>
     @else
         <li class="menu-gsap">
-            <a class="nav-link" href="{{ $item['url'] }}">
+            <a class="nav-link" href="{{ $item['url'] ?? 'javascript:void(0);' }}">
                 {{ $item['title'] }}
             </a>
         </li>

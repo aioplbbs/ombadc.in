@@ -3,8 +3,10 @@
 		<div class="b-title">
 			<ul class="b-menu">
 				<li class="b-item"><a href="{{url('/')}}">Home</a></li>
-				<li class="b-item"><a href="javascript:void(0)">Publications</a></li>
-				<li class="b-item"><a class="active">{{$page->name}}</a></li>
+                @if(!empty($bread))
+				<li class="b-item"><a href="javascript:void(0)"> {{$bread}}</a></li>
+                @endif
+				<li class="b-item"><a class="active"> {{$page->name}}</a></li>
 			</ul>
 			<h3>{{$page->name}}</h3>
 		</div>

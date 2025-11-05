@@ -35,7 +35,8 @@ class PageRequest extends FormRequest
             'page_type'=> 'nullable|string',
             'gallery'=> 'nullable|array',
             'gallery.*'=> 'nullable|string',
-            'poster_id'=> 'nullable|string'
+            'poster_id'=> 'nullable|string',
+            
         ];
 
         return $rules;

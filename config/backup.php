@@ -7,7 +7,7 @@ return [
          * The name of this application. You can use this name to monitor
          * the backups.
          */
-        'name' => env('APP_NAME', 'laravel-backup'),
+        'name' => "Backup", //env('APP_NAME', 'laravel-backup'),
 
         'source' => [
             'files' => [
@@ -151,7 +151,7 @@ return [
              * The disk names on which the backups will be stored.
              */
             'disks' => [
-                'local',
+                's3',
             ],
         ],
 
@@ -214,8 +214,8 @@ return [
             'to' => 'rajesh@aio.in',
 
             'from' => [
-                'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-                'name' => env('MAIL_FROM_NAME', 'Example'),
+                'address' => env('MAIL_FROM_ADDRESS', 'rajesh@aio.in'),
+                'name' => env('MAIL_FROM_NAME', 'Ombadc Backup'),
             ],
         ],
 

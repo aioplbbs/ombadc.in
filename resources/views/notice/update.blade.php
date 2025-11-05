@@ -47,6 +47,12 @@
                                         {{ in_array('Notices', $selectedCategories) ? 'checked' : '' }}>
                                     <label class="form-check-label" for="notices">Notices</label>
                                 </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" id="tender" name="notice_category[]" value="Tender"
+                                        class="form-check-input"
+                                        {{ in_array('Tender', $selectedCategories) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="tender">Tender</label>
+                                </div>
                             </div>
 
                             {{-- Notice Type --}}

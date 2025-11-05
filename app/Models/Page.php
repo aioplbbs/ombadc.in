@@ -101,7 +101,7 @@ class Page extends Model implements HasMedia
 
         return [
             'gallery' => Gallery::find($data['gallery_id'] ?? null),
-            'banner'  => Gallery::find($data['banner_id'] ?? null),
+            'banner'  => Banner::find($data['banner_id'] ?? null),
         ];
     }
 

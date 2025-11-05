@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use Illuminate\Http\Request;
 use App\Models\Setting;
-use Str;
+use Illuminate\Support\Str;
 
 class BannerController extends Controller
 {
@@ -27,7 +28,7 @@ class BannerController extends Controller
             'items' => ["Home"],
             'last_item' => "Banner"
         ];
-        $data = Setting::where('name', 'banner')->first();
+        $data = Banner::orderBy("id","desc")->paginate(10);
         return view('banner.index', compact('data', 'breadcrumb'));
     }
 
@@ -50,18 +51,17 @@ class BannerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'banner' => 'image|max:2048', // 5MB max
+            'banner' => 'array',
+            'banner.*' => 'image|max:2048'
         ]);
-        $setting = Setting::where('name', 'banner')->first();
-        if ($request->hasFile('banner') && !empty($setting)) {
-            $file = $request->file('banner');
-            $setting->addMedia($file)
-                ->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())
-                ->withCustomProperties([
-                    'name' => $request->name??"Banner",
-                    'status' => $request->status??"Show"
-                ])
-                ->toMediaCollection('banner');
+        // $setting = Setting::where('name', 'banner')->first();
+        $banner = Banner::create([
+            'caption'=>$request->name
+        ]);
+        if ($request->hasFile('banner')) {
+            foreach ($request->file('banner') as $file) {
+                $banner->addMedia($file)->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())->toMediaCollection('banner');
+            }
             return redirect()->route('banner.index')->with('success', 'Banner Uploaded Successfully.');
         }
         return redirect()->route('banner.index')->with('error', 'There is some error. Please try after sometime.');
@@ -85,9 +85,11 @@ class BannerController extends Controller
             'items' => ["Home"],
             'last_item' => "Banner"
         ];
-        $setting = Setting::where('name', 'banner')->first();
-        $media = $setting->media()->where('id', $id)->first();
-        return view('banner.update', compact('media', 'breadcrumb'));
+        $banner = Banner::findOrFail($id);
+        // $setting = Setting::where('name', 'banner')->first();
+        // $media = $setting->media()->where('id', $id)->first();
+        $media = $banner->getFirstMedia('banner');
+        return view('banner.update', compact('banner', 'breadcrumb'));
     }
 
     /**
@@ -99,24 +101,29 @@ class BannerController extends Controller
             'banner' => 'image|max:2048', // 5MB max
             'status' => 'in:Show,Hide'
         ]);
-        $setting = Setting::where('name', 'banner')->first();
-        $media = $setting->media()->where('id', $id)->first();
+        // $setting = Setting::where('name', 'banner')->first();
+        $banner = Banner::findOrFail($id);
+        $media = $banner->getFirstMedia('banner');
 
-        if ($request->hasFile('banner') && !empty($setting)) {
+        if ($request->hasFile('banner') && !empty($banner)) {
             $media->delete();
             $file = $request->file('banner');
-            $setting->addMedia($file)
+            $banner->addMedia($file)
                 ->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())
                 ->withCustomProperties([
-                    'name' => $request->name??"Banner",
                     'status' => $request->status
                 ])
                 ->toMediaCollection('banner');
+                $banner->update([
+                    'caption'=>$request->name
+                ]);
             return redirect()->route('banner.index')->with('success', 'Banner Uploaded Successfully.');
         }else{
-            $media->setCustomProperty('name', $request->name);
             $media->setCustomProperty('status', $request->status);
             $media->save();
+            $banner->update([
+                'caption'=>$request->name
+            ]);
         }
         return redirect()->route('banner.index')->with('error', 'There is some error. Please try after sometime.');
     }
@@ -124,11 +131,20 @@ class BannerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Banner $banner)
     {
-        $setting = Setting::where('name', 'banner')->first();
-        $media = $setting->media()->where('id', $id)->first();
-        $media->delete();
+        $banner->clearMediaCollection('banner');
+        $banner->delete();
         return redirect()->back()->with('success', 'Banner Deleted Successfully');
+    }
+
+    public function imageDestroy(Banner $banner, $gid)
+    {
+        $media = $banner->getMedia('banner')->where('id', $gid)->first();
+        if($media){
+            $media->delete();
+            return redirect()->back()->with('success', 'Image Deleted Successfully');
+        }
+        return redirect()->back()->with('error', 'Image not found');
     }
 }
