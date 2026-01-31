@@ -181,7 +181,7 @@
           </button>
         </div>
         <div fss-anchor="view-1" class="fss-mainview fss-active">
-          <link rel="stylesheet" href="https://www.ombadc.in/assets/css/responsive.css">
+          <link rel="stylesheet" href="{{ frontAsset('assets/css/responsive.css') }}">
           <div class="main-wrapper">
             <div class="rectangle5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight5" aria-controls="offcanvasRight5">
               <a href="#" data-toggle="modal" data-target="#myModal5">
@@ -434,18 +434,18 @@
     top.location = self.location;
   }
 </script>
-<script src="https://www.ombadc.in/assets/js/gsap.min.js"></script>
-<script src="https://www.ombadc.in/assets/js/ScrollTrigger.min.js"></script>
+<script src="{{ frontAsset('assets/js/gsap.min.js') }}"></script>
+<script src="{{ frontAsset('assets/js/ScrollTrigger.min.js') }}"></script>
 <!-- <script src="https://www.ombadc.in/assets/js/animation.js"></script> -->
 
 <script>
   // Check if the current page is the home page (modify the condition accordingly)
   document.addEventListener('DOMContentLoaded', function(){
-    if (window.location.href === 'https://ombadc.office.aio.in/') {
+    if (window.location.href === 'https://ombadc.in/') {
       console.log(window.location.href);
     // Load the script only on the home page
     var script = document.createElement('script');
-    script.src = 'https://www.ombadc.in/assets/js/animation.js';
+    script.src = '{{ frontAsset("assets/js/animation.js") }}';
     document.head.appendChild(script);
   }
   });
