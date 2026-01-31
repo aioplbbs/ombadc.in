@@ -17,7 +17,7 @@ pipeline {
             steps {
                 withCredentials([
                     usernamePassword(
-                        credentialsId: 'similipal.org',
+                        credentialsId: 'ombadc.in',
                         usernameVariable: 'SFTP_USER',
                         passwordVariable: 'SFTP_PASS'
                     )
