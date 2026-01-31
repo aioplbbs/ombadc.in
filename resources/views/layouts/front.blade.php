@@ -16,7 +16,7 @@
       <link rel="stylesheet" href="{{frontAsset('assets/css/material-design-iconic-font.min.css')}}">
       <link rel="stylesheet" href="{{frontAsset('assets/css/plugins.css')}}">
 
-      <link rel="stylesheet" href="https://www.ombadc.in/assets/css/style.css">
+      <link rel="stylesheet" href="{{ frontAsset('assets/css/style.css') }}">
       <!-- <link rel="stylesheet" href="/assets/css/responsive.css"> -->
       <link rel="stylesheet" href="{{frontAsset('assets/css/owl.css')}}">
       <link href="{{frontAsset('assets/css/all.min.css')}}" rel="stylesheet">
