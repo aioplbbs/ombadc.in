@@ -21,8 +21,18 @@ use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\MIS\DepartmentController as MISDepartmentController;
 use App\Http\Controllers\PersonalProfileController;
 use App\Http\Controllers\RepositoryController;
+
+use App\Http\Controllers\MIS\MisController;
+use App\Http\Controllers\MIS\PiaController;
+use App\Http\Controllers\MIS\ProposalController;
+use App\Http\Controllers\MIS\RoleController as MISRoleController;
+use App\Http\Controllers\MIS\SectorController as MISSectorController;
+use App\Http\Controllers\MIS\UserController as MISUserController;
+use App\Http\Controllers\MIS\WorkflowController;
+use App\Http\Controllers\MIS\WorkflowStepsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,4 +100,40 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])
     Route::resource('/permission', PermissionController::class);
     Route::post('/permission/assign', [PermissionController::class, 'permissionToRoll'])->name('permission.assign');
     Route::resource('/roles', RolesController::class);
+
+    Route::prefix('mis')->name('mis.')->group(function(){
+        Route::get('/', [MisController::class, 'dashboard'])->name('mis-dashboard');
+
+        Route::resource('proposals', ProposalController::class);
+        Route::resource('workflow', WorkflowController::class)->except(['show', 'create', 'edit']);
+        Route::resource('workflow/{workflow}/steps', WorkflowStepsController::class);
+
+        Route::resource('users', MISUserController::class);
+        Route::get('users/{user}/activate',[MISUserController::class, 'activate'])->name('users.activate');
+        Route::get('users/{user}/deactivate',[MISUserController::class, 'deactivate'])->name('users.deactivate');
+
+        Route::resource('roles', MISRoleController::class);
+        Route::get('roles/{role}/activate',[MISRoleController::class, 'activate'])->name('roles.activate');
+        Route::get('roles/{role}/deactivate',[MISRoleController::class, 'deactivate'])->name('roles.deactivate');
+
+        Route::resource('sectors', MISSectorController::class);
+        Route::get('sectors/{sector}/activate',[MISSectorController::class, 'activate'])->name('sectors.activate');
+        Route::get('sectors/{sector}/deactivate',[MISSectorController::class, 'deactivate'])->name('sectors.deactivate');
+
+        Route::resource('pias', PiaController::class);
+        Route::get('pias/{pia}/activate',[PiaController::class, 'activate'])->name('pias.activate');
+        Route::get('pias/{pia}/deactivate',[PiaController::class, 'deactivate'])->name('pias.deactivate');
+
+        Route::resource('departments', MISDepartmentController::class);
+        Route::get('departments/{department}/activate',[MISDepartmentController::class, 'activate'])->name('departments.activate');
+        Route::get('departments/{department}/deactivate',[MISDepartmentController::class, 'deactivate'])->name('departments.deactivate');
+
+    });
+    
+});
+
+
+
+Route::get('mis', function(){
+    return view('mis.test');
 });
