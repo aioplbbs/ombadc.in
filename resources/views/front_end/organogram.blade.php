@@ -41,7 +41,7 @@
                         <div class="staff_card-1">                          
                             <div class="staff_info">
                                 <div class="staff_image">
-                                    <img src="https://www.ombadc.in/images/profile_images/1eca833ba32ea6d0c6813fd0649f5c18_1.png" alt="" class="card-img-top" />
+                                    <img src="https://d2er6gsnxjpdia.cloudfront.net/664/eGAqN8oXM1tW1ZV4.png" alt="" class="card-img-top" />
                                 </div>
                                 <div class="staff_name_container">
                                     <div class="staff_name">
@@ -65,7 +65,7 @@
                         <div class="staff_card-1">                          
                             <div class="staff_info">
                                 <div class="staff_image">
-                                    <img src="https://www.ombadc.in/images/profile_images/g-rajesh.png" alt="" class="card-img-top" />
+                                    <img src="https://d2er6gsnxjpdia.cloudfront.net/641/c92arETZ9M3au7j7.png" alt="" class="card-img-top" />
                                 </div>
                                 <div class="staff_name_container">
                                     <div class="staff_name">
@@ -83,7 +83,7 @@
 							<div class="staff_card card-2">
 								<div class="staff_info">
 									<div class="staff_image1">
-										<img src="https://www.ombadc.in/images/Shaikh%20Naimuddin%20.png" class="card-img-top" />
+										<img src="https://d2er6gsnxjpdia.cloudfront.net/assets/images/Shaikh%20Naimuddin%20.png" class="card-img-top" />
 									</div>
 									<div class="staff_name_container1">
 										
@@ -102,7 +102,7 @@
 								
 								<div class="staff_info">
 									<div class="staff_image1">
-										<img src="https://www.ombadc.in/images/Shri%20Dwaipayan%20Pattanaik%20(OSD%20I%20to%20Oversight%20Authority).png" class="card-img-top" />
+										<img src="https://d2er6gsnxjpdia.cloudfront.net/assets/images/Shri%20Dwaipayan%20Pattanaik%20(OSD%20I%20to%20Oversight%20Authority).png" class="card-img-top" />
 									</div>
 									<div class="staff_name_container1">
 									   
@@ -121,7 +121,7 @@
 							   
 								<div class="staff_info">
 									<div class="staff_image1">
-										<img src="https://www.ombadc.in/images/GMs/Shri-Jayant-Kumar-Das.jpg" class="card-img-top" />
+										<img src="https://d2er6gsnxjpdia.cloudfront.net/assets/images/Shri-Jayant-Kumar-Das.jpg" class="card-img-top" />
 									</div>
 									<div class="staff_name_container1">
 										<div class="staff_name smallfont">
@@ -141,7 +141,7 @@
 										<img src="images/profile_images/shri-sudhakar-burgi.png" class="card-img-top" />
 									</div> -->
 									<div class="staff_image1">
-										<img src="https://www.ombadc.in/images/GMs/no-photo.jpg" class="card-img-top" />
+										<img src="https://d2er6gsnxjpdia.cloudfront.net/assets/images/no-photo.jpg" class="card-img-top" />
 									</div>
 									<div class="staff_name_container1">
                                         <!-- 										
@@ -163,7 +163,7 @@
 								
 								<div class="staff_info">
 									<div class="staff_image1">
-										<img src="https://www.ombadc.in/images/GMs/Shri-Bhabani-Prasad-Das(GM-Finance).jpg" class="card-img-top" />
+										<img src="https://d2er6gsnxjpdia.cloudfront.net/assets/images/Shri-Bhabani-Prasad-Das(GM-Finance).jpg" class="card-img-top" />
 									</div>
 									<div class="staff_name_container1">
 									   
@@ -184,7 +184,7 @@
 								
 								<div class="staff_info">
 									<div class="staff_image1">
-										<img src="https://www.ombadc.in/images/Swati%20Swagatika%20Pratihari%20(Company%20Secretary).jpeg" class="card-img-top" />
+										<img src="https://d2er6gsnxjpdia.cloudfront.net/662/KqktFgcZB1JzFamm.jpeg" class="card-img-top" />
 									</div>
 									<div class="staff_name_container1">
 										

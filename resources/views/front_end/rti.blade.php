@@ -378,19 +378,19 @@
 								<tr>
 									<td>1</td>
 									<td>Article of Association</td>
-									<td><a href="https://www.ombadc.in/images/documents/docs_1721648934.PDF"><i class="fa-solid fa-download"></i></a></td>
+									<td><a href="https://d2er6gsnxjpdia.cloudfront.net/assets/document/docs_1721648934.PDF"><i class="fa-solid fa-download"></i></a></td>
 								</tr>
 								<tr>
 									<td>2</td>
 									<td>Memorandum of Association</td>
-									<td><a href="https://www.ombadc.in/images/documents/docs_1721648706.PDF"><i class="fa-solid fa-download"></i></a></td>
+									<td><a href="https://d2er6gsnxjpdia.cloudfront.net/assets/document/docs_1721648706.PDF"><i class="fa-solid fa-download"></i></a></td>
 								</tr>
 								<tr>
 									<td>3</td>
 									<td>Guidelines for Project Financing, Implementation and Monitoring</td>
 									<td>
-                                        <a href="https://www.ombadc.in/images/documents/docs_1721648869.PDF"><i class="fa-solid fa-download"></i></a>
-										<a href="https://www.ombadc.in/images/documents/docs_1721648487.pdf"><i class="fa-solid fa-download"></i></a>
+                                        <a href="https://d2er6gsnxjpdia.cloudfront.net/assets/document/docs_1721648869.PDF"><i class="fa-solid fa-download"></i></a>
+										<a href="https://d2er6gsnxjpdia.cloudfront.net/assets/document/docs_1721648487.pdf"><i class="fa-solid fa-download"></i></a>
 									</td>
 								</tr>
 							</tbody>
@@ -812,19 +812,19 @@
 								<tr>
 									<td>1</td>
 									<td>Article of Association</td>
-									<td><a href="https://www.ombadc.in/images/documents/docs_1721648934.PDF"><i class="fa-solid fa-download"></i></a></td>
+									<td><a href="https://d2er6gsnxjpdia.cloudfront.net/assets/document/docs_1721648934.PDF"><i class="fa-solid fa-download"></i></a></td>
 								</tr>
 								<tr>
 									<td>2</td>
 									<td>Memorandum of Association</td>
-									<td><a href="https://www.ombadc.in/images/documents/docs_1721648706.PDF"><i class="fa-solid fa-download"></i></a></td>
+									<td><a href="https://d2er6gsnxjpdia.cloudfront.net/assets/document/docs_1721648706.PDF"><i class="fa-solid fa-download"></i></a></td>
 								</tr>
 								<tr>
 									<td>3</td>
 									<td>Guidelines for Project Financing, Implementation and Monitoring</td>
 									<td>
-                                        <a href="https://www.ombadc.in/images/documents/docs_1721648869.PDF"><i class="fa-solid fa-download"></i></a>
-										<a href="https://www.ombadc.in/images/documents/docs_1721648487.pdf"><i class="fa-solid fa-download"></i></a>
+                                        <a href="https://d2er6gsnxjpdia.cloudfront.net/assets/document/docs_1721648869.PDF"><i class="fa-solid fa-download"></i></a>
+										<a href="https://d2er6gsnxjpdia.cloudfront.net/assets/document/docs_1721648487.pdf"><i class="fa-solid fa-download"></i></a>
 									</td>
 								</tr>
 							</tbody>
