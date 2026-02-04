@@ -19,18 +19,18 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://www.ombadc.in/assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://www.ombadc.in/assets/css/material-design-iconic-font.min.css">
-	<link rel="stylesheet" href="https://www.ombadc.in/assets/css/plugins.css">
-	<link rel="stylesheet" href="https://www.ombadc.in/assets/css/style.css">
-	<link rel="stylesheet" href="https://www.ombadc.in/assets/css/owl.css">
-	<link href="https://www.ombadc.in/assets/css/all.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://www.ombadc.in/assets/css/owl.theme.default.css" />
-	<link href="https://www.ombadc.in/assets/css/fsscroller.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="https://www.ombadc.in/assets/css/rti.css">
+	<link rel="stylesheet" href="{{ frontAsset('assets/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ frontAsset('assets/css/material-design-iconic-font.min.css') }}">
+	<link rel="stylesheet" href="{{ frontAsset('assets/css/plugins.css') }}">
+	<link rel="stylesheet" href="{{ frontAsset('assets/css/style.css') }}">
+	<link rel="stylesheet" href="{{ frontAsset('assets/css/owl.css') }}">
+	<link href="{{ frontAsset('assets/css/all.min.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="{{ frontAsset('assets/css/owl.theme.default.css') }}" />
+	<link href="{{ frontAsset('assets/css/fsscroller.min.css') }}" rel="stylesheet" />
+	<link rel="stylesheet" href="{{ frontAsset('assets/css/rti.css') }}">
     @endpush
     <section class="section banner">
-		<div class="bg-banner" style="background-image: url('https://www.ombadc.in/images/innerbanner/history.jpg');background-size: cover;">
+		<div class="bg-banner" style="background-image: url('{{ frontAsset('assets/images/breadcrump.jpg') }}');background-size: cover;">
 			<div class="b-title">
 				<ul class="b-menu">
 					<li class="b-item"><a href="{{ route('home') }}">Home</a></li>

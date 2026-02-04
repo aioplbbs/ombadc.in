@@ -8,7 +8,7 @@
 
   <section
     class="faculty"
-    style="background-image: url('/assets/image/1167169_ORU2CC0.jpg')"
+    style="background-image: url('{{ frontAsset('/assets/image/1167169_ORU2CC0.jpg') }}')"
   >
     <div class="container">
       <div class="main-profile">

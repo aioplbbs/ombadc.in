@@ -109,6 +109,11 @@ class PermissionSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'update department-website']);
         Permission::firstOrCreate(['name' => 'delete department-website']);
 
+        Permission::firstOrCreate(['name' => 'view video-gallery']);
+        Permission::firstOrCreate(['name' => 'create video-gallery']);
+        Permission::firstOrCreate(['name' => 'update video-gallery']);
+        Permission::firstOrCreate(['name' => 'delete video-gallery']);
+
         Permission::firstOrCreate(['name' => 'view settings']);
         Permission::firstOrCreate(['name' => 'update settings']);
         

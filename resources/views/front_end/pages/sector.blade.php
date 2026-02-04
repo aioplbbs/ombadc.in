@@ -28,7 +28,7 @@ $sector_data = $page->customData()->where('name', 'sector_data')->first()->data;
 </section>
 @else
 <section class="section banner">
-      <div class="bg-banner" style="background-image: url('https://www.ombadc.in/images/innerbanner/history.jpg');background-size: cover;">
+      <div class="bg-banner" style="background-image: url('{{ frontAsset('assets/images/breadcrump.jpg') }}');background-size: cover;">
         <div class="b-title">
           <ul class="b-menu">
             <li class="b-item"><a href="https://ombadc.office.aio.in/">Home</a></li>

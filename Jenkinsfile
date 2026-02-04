@@ -6,9 +6,9 @@ pipeline {
             steps {
                 script {
                     // Set environment variables
-                    env.SFTP_HOST = "65.20.83.229"
+                    env.SFTP_HOST = "148.66.159.104"
                     env.SFTP_PATH = "public_html"
-                    env.SFTP_UPLOAD_TYPE = "partial"
+                    env.SFTP_UPLOAD_TYPE = "full"
                 }
             }
         }

@@ -20,10 +20,10 @@
     </style>
     @endpush
     <section class="section banner">
-        <div class="bg-banner"style="background-image: url('https://www.ombadc.in/images/innerbanner/history.jpg');background-size: cover;">
+        <div class="bg-banner"style="background-image: url('{{ frontAsset('assets/images/breadcrump.jpg') }}');background-size: cover;">
             <div class="b-title">
                 <ul class="b-menu">
-                    <li class="b-item"><a href="">Home</a></li>
+                    <li class="b-item"><a href="{{ route('home') }}">Home</a></li>
                     <li class="b-item"><a href="javascript:void(0)">About Us</a></li>
                     <li class="b-item"><a class="active">Who's Who</a></li>
                 </ul>
@@ -85,7 +85,7 @@
                     <div class="sub-coll-sdg-x">Government Officials as Directors (7 IAS, 2 IFS)</div>
                     @foreach($board_of_directors as $personal_profile)
                     @php
-                    $image_url = $personal_profile->getFirstMediaUrl('personal-profile')
+                    $image_url = $personal_profile->getFirstMediaUrl('personal_profile')
                     @endphp
                     <div class="col-xl-6 col-lg-5 col-md-6">
                         <center>
@@ -95,7 +95,7 @@
                                 </div>
                                 <div class="bottom">
                                     <div class="content"><br>
-                                        <p class="about-me">{{ $personal_profile->expertise }}</p>
+                                        <p class="about-me">{{ $personal_profile->short_brief }}</p>
                                     </div>
                                     <div class="bottom-bottom">
                                         <span class="name">{{ $personal_profile->name }}</span>
@@ -111,7 +111,7 @@
                     <div class="sub-coll-sdg-x">Independent Directors</div>
                     @foreach ($independent_directors as $personal_profile)
                     @php
-                    $image_url = $personal_profile->getFirstMediaUrl('personal-profile')
+                    $image_url = $personal_profile->getFirstMediaUrl('personal_profile')
                     @endphp
                     <div class="col-xl-4 col-lg-5 col-md-6">
                         <center>
@@ -121,7 +121,7 @@
                                 </div>
                                 <div class="bottom">
                                     <div class="content"><br>
-                                        <p class="about-me">{{ $personal_profile->expertise }}</p>
+                                        <p class="about-me">{{ $personal_profile->short_brief }}</p>
                                     </div>
                                     <div class="bottom-bottom">
                                         <span class="name">{{ $personal_profile->name }}</span>
@@ -150,7 +150,7 @@
 	                <div class="sub-coll-sdg-x">Chief Executive Officer</div> 
                     @foreach($ombadc_officials as $personal_profile)
                     @php
-                    $image_url = $personal_profile->getFirstMediaUrl('personal-profile')
+                    $image_url = $personal_profile->getFirstMediaUrl('personal_profile')
                     @endphp
                     <div class="col-xl-4 col-lg-5 col-md-6">
 			            <center>
@@ -160,7 +160,7 @@
 								</div>
 								<div class="bottom">
 									<div class="content"><br>
-										<p class="about-me">{{ $personal_profile->expertise }}</p>
+										<p class="about-me">{{ $personal_profile->short_brief }}</p>
 									</div>
 									<div class="bottom-bottom">
 										<span class="name">{{ $personal_profile->name }}</span>
@@ -176,7 +176,7 @@
 		            <div class="sub-coll-sdg-x">General Managers</div> 
                     @foreach($general_managers as $personal_profile)
                     @php
-                    $image_url = $personal_profile->getFirstMediaUrl('personal-profile')
+                    $image_url = $personal_profile->getFirstMediaUrl('personal_profile')
                     @endphp
                     <div class="col-xl-4 col-lg-5 col-md-6">
 			            <center>
@@ -186,7 +186,7 @@
 								</div>
 								<div class="bottom">
 									<div class="content"><br>
-										<p class="about-me">{{ $personal_profile->expertise }}</p>
+										<p class="about-me">{{ $personal_profile->short_brief }}</p>
 									</div>
 									<div class="bottom-bottom">
 										<span class="name">{{ $personal_profile->name }}</span>
@@ -202,7 +202,7 @@
 		            <div class="sub-coll-sdg-x">Experts</div> 
                     @foreach($experts as $personal_profile)
                     @php
-                    $image_url = $personal_profile->getFirstMediaUrl('personal-profile')
+                    $image_url = $personal_profile->getFirstMediaUrl('personal_profile')
                     @endphp
                     <div class="col-xl-4 col-lg-5 col-md-6">
 			            <center>
@@ -212,7 +212,7 @@
 								</div>
 								<div class="bottom">
 									<div class="content"><br>
-										<p class="about-me">{{ $personal_profile->expertise }}</p>
+										<p class="about-me">{{ $personal_profile->short_brief }}</p>
 									</div>
 									<div class="bottom-bottom">
 										<span class="name">{{ $personal_profile->name }}</span>
@@ -239,7 +239,7 @@
 	            <div class="row justify-content-center">
                     @foreach ($supporting_staffs as $personal_profile)
                     @php
-                    $image_url = $personal_profile->getFirstMediaUrl('personal-profile')
+                    $image_url = $personal_profile->getFirstMediaUrl('personal_profile')
                     @endphp
                     <div class="col-xl-4 col-lg-5 col-md-6">
                         <center>
@@ -248,7 +248,7 @@
                                     <div class="single-team-image">
                                         <img src="{{ $image_url }}" alt="{{ $personal_profile->name }}" title="{{ $personal_profile->name }} ({{ $personal_profile->designation }})">
                                         <h4 style="color:white; margin-top:15px;">{{ $personal_profile->name }}</h4>
-                                        <h6 style="color:white">{{ $personal_profile->expertise }}</h6>
+                                        <h6 style="color:white">{{ $personal_profile->short_brief }}</h6>
                                     </div>
                                 </a> 
                             </div>

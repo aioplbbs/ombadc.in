@@ -24,10 +24,10 @@
     </style>
     @endpush
     <section class="section banner">
-        <div class="bg-banner"style="background-image: url('https://www.ombadc.in/images/innerbanner/history.jpg');background-size: cover;">
+        <div class="bg-banner"style="background-image: url('{{ frontAsset('assets/images/breadcrump.jpg') }}');background-size: cover;">
             <div class="b-title">
                 <ul class="b-menu">
-                    <li class="b-item"><a href="">Home</a></li>
+                    <li class="b-item"><a href="{{ route('home') }}">Home</a></li>
                     <li class="b-item"><a href="javascript:void(0)">About Us</a></li>
                     <li class="b-item"><a class="active">Photo Gallery</a></li>
                 </ul>
@@ -60,14 +60,14 @@
 		        <div class="MultiCarousel-inner photo-gallery">
                     @foreach($galleries as $gallery)
                     @php
-                      $imageUrl = $gallery->getFirstMediaUrl('gallery', 'thumb') ?: asset('assets/images/small/small-1.jpg');
+                      $imageUrl = $gallery->getFirstMediaUrl('gallery') ?: asset('assets/images/small/small-1.jpg');
                       $thumbnail = $gallery->getFirstMedia('gallery')->getUrl('thumb') ?: asset('assets/images/small/small-1.jpg');
                     @endphp
                     <div class="item">
                         <a class="gal_img" href="{{ route('galleries', ['slug'=>$gallery->slug]) }}">
                             <div class="pad15">
                                 <div class="image-box item-zoom" >
-                                    <img src="{{ $thumbnail }}" alt="{{ $gallery->caption }}" class="titel_image" >
+                                    <img src="{{ $imageUrl }}" alt="{{ $gallery->caption }}" class="titel_image" >
                                 </div>
                                 <div class="box_10">
                                     {{ substr($gallery->caption, 0, 200) }} @if(strlen($gallery->caption) >200) {{ ' ..' }} @endif
@@ -242,8 +242,8 @@
         });
         loadGallery();
     </script>
-    <link rel='stylesheet' href="https://www.ombadc.in/assets/css/lightgallery.css">
-    <script src='https://www.ombadc.in/assets/js/lightgallery-all.min.js'></script>
+    <link rel='stylesheet' href="{{ frontAsset('assets/css/lightgallery.css') }}">
+    <script src='{{ frontAsset('assets/js/lightgallery-all.min.js') }}'></script>
     <script>
         $(document).ready(function() {
             $('#lightgallery').lightGallery({

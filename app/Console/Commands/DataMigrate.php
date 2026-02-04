@@ -3,12 +3,14 @@
 namespace App\Console\Commands;
 
 use App\Models\Page;
+use App\Models\VideoGallery;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Http;
-use Illuminate\Support\Facades\Str;
+use Str;
 use App\Models\Department;
 use App\Models\Project;
+use App\Models\PersonalProfile;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class DataMigrate extends Command
@@ -32,21 +34,71 @@ class DataMigrate extends Command
      */
     public function handle()
     {
-        $sql = "SELECT * from ombadc_project where Status='1' and DepartmentID='17' AND isDeleted=0 order by ID desc";
+        $sql = "SELECT * from ombadc_banner where SectorID=0 and Status=1";
         $data = DB::connection('mysql_main')->select($sql);
-        // dd($data);
+
         foreach ($data as $key => $value) {
-            $d = [
-                'department_id' => 19,
-                'name' => $value->Name,
-                // 'short_name' => $value->ShortName,
-                'sanctioned' => trim(str_replace([',', '₹', 'Cr.', 'Cr'], '', $value->Sanctioned)),
-                'released' => trim(str_replace([',', '₹', 'Cr.', 'Cr'], '', $value->Released)),
-                'utilized' => trim(str_replace([',', '₹', 'Cr.', 'Cr'], '', $value->Utilised)),
-            ];
-            $dis = New Project($d);
-            // $dis->save();
+            $name = $value->Caption;
+            $image = explode(".", $value->Image);
+            $media = Media::where([
+                ['model_type', "like", "%Banner%"],
+                ['model_id', 4],
+                ['name', $image[0]]
+            ])->first();
+
+            if(!empty($media)){
+                $media->order_column = $value->Odr;
+                $media->update();
+            }
+            
+
+            // $video = [
+            //     'name' => $value->Name,
+            //     'code' => $value->Code,
+            //     'order' => $value->Odr
+            // ];
+            // $video_data = new VideoGallery($video);
+            // $video_data->save();
+            // $kalia = [
+            //     'name' => $value->per_name,
+            //     'designation' => $value->per_desig,
+            //     'staff_category' => $value->per_type,
+            //     'email' => $value->per_email,
+            //     'phone_number' => $value->per_phone,
+            //     'date_of_birth' => date('Y-m-d', strtotime($value->per_dob)),
+            //     'qualification' => $value->per_qualification,
+            //     'short_brief' => $value->per_exp,
+            //     'order' => $value->pos
+            // ];
+
+            // $personal = PersonalProfile::where('name', $value->per_name)->first();
+            // $personal->order = $value->pos;
+            // $personal->update();
+
+            // $personal = new PersonalProfile($kalia);
+            // $personal->save();
+
+            // $url = "https://www.ombadc.in/images/profile_images/".$value->per_photo;
+            // if($this->imageUrlExists($url)){
+            //     $extension = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION);
+            //     $personal->addMediaFromUrl($url)->usingFileName(Str::random(16). ($extension ? '.' . $extension : ''))->toMediaCollection('personal_profile');
+            // }
         }
+
+
+        // dd($data);
+        // foreach ($data as $key => $value) {
+        //     $d = [
+        //         'department_id' => 19,
+        //         'name' => $value->Name,
+        //         // 'short_name' => $value->ShortName,
+        //         'sanctioned' => trim(str_replace([',', '₹', 'Cr.', 'Cr'], '', $value->Sanctioned)),
+        //         'released' => trim(str_replace([',', '₹', 'Cr.', 'Cr'], '', $value->Released)),
+        //         'utilized' => trim(str_replace([',', '₹', 'Cr.', 'Cr'], '', $value->Utilised)),
+        //     ];
+        //     $dis = New Project($d);
+        //     // $dis->save();
+        // }
         // foreach($data as $key => $value){
         //     print($value->Name." \n");
             
@@ -94,5 +146,10 @@ class DataMigrate extends Command
         
         // print("// ✅ Gallery Uploaded Successfully.\n");
 
+    }
+
+    private function imageUrlExists($url) {
+        $headers = @get_headers($url);
+        return $headers && strpos($headers[0], '200') !== false;
     }
 }

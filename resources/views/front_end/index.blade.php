@@ -1,136 +1,44 @@
 <x-front-layout :menus="$menus" :departments="$departments">
   <!-- banner start -->
   @push('style')
-    <link rel="stylesheet" href="https://www.ombadc.in/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://www.ombadc.in/assets/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="https://www.ombadc.in/assets/css/plugins.css">
-    <link rel="stylesheet" href="https://www.ombadc.in/assets/css/style.css">
+    <!-- <link rel="stylesheet" href="https://www.ombadc.in/assets/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://www.ombadc.in/assets/css/material-design-iconic-font.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://www.ombadc.in/assets/css/plugins.css"> -->
+    <!-- <link rel="stylesheet" href="https://www.ombadc.in/assets/css/style.css"> -->
     <!-- <link rel="stylesheet" href="/assets/css/responsive.css"> -->
-    <link rel="stylesheet" href="https://www.ombadc.in/assets/css/owl.css">
-    <link href="https://www.ombadc.in/assets/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://www.ombadc.in/assets/css/owl.theme.default.css" />
-    <link href="https://www.ombadc.in/assets/css/fsscroller.min.css" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="{{ frontAsset('assets/css/owl.css') }}">
+    <link href="{{ frontAsset('assets/css/all.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ frontAsset('assets/css/owl.theme.default.css') }}" />
+    <link href="{{ frontAsset('assets/css/fsscroller.min.css') }}" rel="stylesheet" /> -->
     <style>
-      /* Add this CSS to style the tooltip */
-      body {
-        overflow-x: hidden;
-      }
-
-      .st0[data-tooltip] {
-        position: relative;
-      }
-
-      .st0[data-tooltip]:hover::after {
-        content: attr(data-tooltip);
-        position: absolute;
-        top: 100%;
-        left: 0;
-        white-space: pre-line;
-        /* This will preserve the line breaks */
-        background-color: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 5px;
-        border-radius: 3px;
-      }
-
-      .extra-data {
-        padding: 160px 0;
-        position: relative;
-        background-color: red;
-        width: 100%;
-        /* height: 400px; */
+      
+      .stats-wrapper {
         display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        /* background-color: rgba(15, 85, 15, 0.75); */
-        /* background-color: #167868; */
-        /* background-color: rgba(22, 120, 104, 0.75); */
-        background-color: rgb(6 75 64 / 75%);
-        flex-direction: column;
-
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 20px;
       }
-
-      .extra-data .headings-extra {
-        font-weight: bold;
-        color: #ffcc00;
-        text-shadow: 0px 1px 4px #fdfdfd7a;
-        font-size: 46px;
-      }
-
-      .extra-data .data-extra {
-        padding: 20px;
-        font-size: 80px;
+      .stat-box {
+        padding: 12px 25px;
         color: white;
-        font-weight: bolder;
-        text-shadow: -2px 1px 3px #464646d1;
-      }
-
-      .extra-data .inner-image-prabhu {
-        position: absolute;
-        width: 100%;
-        z-index: -9;
-      }
-
-      .main-div-distance-prabhu {
-        display: flex !important;
-        width: 100%;
-        justify-content: space-between !important;
-        align-items: center !important;
-      }
-
-      .extra-data .extra-data-left {
-        width: 100%;
-        text-align: center;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: flex-start;
-      }
-
-      .extra-data .extra-data-right {
-        width: 55%;
+        font-weight: 600;
+        border-radius: 15px;
+        font-size: 14px;
+        min-width: 130px;
         text-align: center;
       }
 
-      .down-data {
-        display: flex;
-        width: 100%;
-        padding: 15px;
-        /* border: 1px solid red; */
-        background-color: aliceblue;
-        border-radius: 5px;
-        background-color: #ffffff96;
-        backdrop-filter: blur(4px);
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      /* Colors matching your image */
+      .stat-box.districts {
+        background: #007c78; /* teal */
       }
 
-      .down-data .small-data-extra {
-        display: flex;
-        justify-content: space-around;
-        width: 75%;
-        padding-bottom: 25px;
-        margin: auto;
-        flex-direction: column-reverse;
-        flex-wrap: nowrap;
-        border-right: 1px solid #999999;
+      .stat-box.blocks {
+        background: #922b5e; /* purple */
       }
 
-      .down-data .small-data-extra:last-child {
-        border-right: none;
-      }
-
-      .data-extra-g {
-        padding: 35px 0 0 0;
-        font-size: 70px;
-        font-weight: bolder;
-        color: #005445;
-      }
-
-      .data-extra-n {
-        border-bottom: 1px solid #999999;
-        font-size: 30px;
-        padding-bottom: 7px;
-        font-weight: bold;
-        color: #3c3c3c;
+      .stat-box.villages {
+        background: #f58220; /* orange */
       }
     </style>
     <link id="load-css-0" rel="stylesheet" type="text/css" href="https://www.gstatic.com/charts/51/css/core/tooltip.css">
@@ -143,22 +51,22 @@
           @php
             $i=0;
           @endphp
-          @foreach ($banners as $banner)
+          @foreach ($banners->getMedia('banner')->sortByDesc('order_column') as $data)
             @php
-              $name = $banner->caption;
-              $media = $banner->getFirstMedia('banner');
+              $name = $data->custom_properties['caption'] ?? '';
+              $media = $data->getUrl();
             @endphp
 
-            @if (!str_starts_with($media->mime_type, 'image/'))
+            @if ($data->mime_type == 'video/mp4')
               <div class="carousel-item @if($i==0){{'active'}}@endif data-bs-interval="17500">
-                <video id="bannerVideo" src="{{$media->getUrl()}}" autoplay muted loop></video>
+                <video id="bannerVideo" src="{{$data->getUrl()}}" autoplay muted loop></video>
               </div>
             @else
               <div class="carousel-item @if($i==0) {{'active'}} @endif">
-                <img src="{{$media->getUrl()}}" class="d-block w-100" alt="..." data-bs-interval="5000">  
+                <img src="{{$data->getUrl()}}" class="d-block w-100" alt="..." data-bs-interval="5000">  
                 @if($name != '')
                   <div class="carousel-caption d-none d-md-block">
-                    <h5 class="caption-banner caption-gsap">{{$name}}</h5>
+                    <h5 class="caption-banner caption-gsap">{!! $name !!}</h5>
                   </div>
                 @endif
               </div>
@@ -196,7 +104,7 @@
   <div class="containers">
     <!-- extra data -->
     <div class="extra-data">
-      <img class="inner-image-prabhu" src="https://www.ombadc.in/images/lh-banner1.jpg" alt="banner">
+      <img class="inner-image-prabhu" src="{{ frontAsset('assets/images/lh-banner1.jpg') }}" alt="banner">
       <div class="extra-data-left">
         <div class="party">
           <h3 class="headings-extra left-gsap">Sanctioned Amount</h3>
@@ -866,6 +774,11 @@
                         </g>
                       </svg>
                     </div>
+                    <div class="stats-wrapper">
+                      <div class="stat-box districts">8 Districts</div>
+                      <div class="stat-box blocks">76 Blocks</div>
+                      <div class="stat-box villages">11,231 Villages</div>
+                    </div>
                   </div>
                 </div>
                 <div class="col-lg-7 mb-2 right-map-gsap">
@@ -937,7 +850,8 @@
                   <div class="single-our-blog social-gsap">
                     <div class="our-blog-image">
                       <a href="{{ route('home') }}">
-                        <img src="{{ $sector->gallery_info['gallery']->getFirstMediaUrl('gallery') }}" alt="{{ $name }}"> 
+                        <!-- <img src="{{ $sector->gallery_info['gallery']->getFirstMediaUrl('gallery') }}" alt="{{ $name }}">  -->
+                        <img src="{{ config("constants.sector_image.".$sector->id) }}" alt="{{ $name }}"> 
                       </a>
                     </div>
                     <div class="our-blog-contnet">
@@ -964,7 +878,7 @@
                         <a href="">{{$name}}</a>
                       </h5>
                       <div class="button-block">
-                        <a href="" class="botton-border">Read more</a>
+                        <a href="{{ route('pages',['slug'=>$sector->slug]) }}" class="botton-border">Read more</a>
                       </div>
                     </div>
                   </div>
@@ -1011,6 +925,7 @@
                       </div>
                       <div class="container_marquee blur">
                         <ul class="slider_marquee">
+                          @if(!empty($notices))
                           @foreach ($notices['Latest News'] as $notice)
                             <li class="pt-3">
                               <div class="date-box">
@@ -1026,11 +941,12 @@
                               </div>
                               <div class="notice-body-text">
                                 <a class="hov" style="color: #01321f;" href="{{ $notice['url'] }}" target="{{ $notice['notice_open_in'] == 'new' ? '_blank' : '_parent' }}">
-                                  <p class="heading_n">{{ $notice['notice_name'] }} {!! $notice['notice_blink']=='Yes' ? ' <img src="https://www.ombadc.in/images/new.gif" alt="New" border="0" align="absmiddle"/>' : '' !!}</p>
+                                  <p class="heading_n">{{ $notice['notice_name'] }} {!! $notice['notice_blink']=='Yes' ? ' <img src="'.frontAsset('assets/images/new.gif').'" alt="New" border="0" align="absmiddle"/>' : '' !!}</p>
                                 </a>
                               </div>
                             </li>
                           @endforeach
+                          @endif
                           
                         </ul>
                       </div>
@@ -1043,11 +959,11 @@
                       </div>
                       <div class="container_marquee blur">
                         <ul class="timeline slider_marquee" style="padding: 20px !important;">
-                          @foreach ($notices['Notices'] as $notice)
+                          @foreach ($notices['Notices'] ?? [] as $notice)
                             <li>
                               <a href="{{$notice['url']}}"  target="{{ $notice['notice_open_in'] == 'new' ? '_blank' : '_parent' }}">
                                 <span class="date-time">{{ date("d M,", strtotime($notice['notice_publish'])) }} {{ date("Y", strtotime($notice['notice_publish'])) }}</span>
-                                <br>{{$notice['notice_name']}} {!! $notice['notice_blink']=='Yes' ? ' <img src="https://www.ombadc.in/images/new.gif" alt="New" border="0" align="absmiddle"/>' : '' !!}</a>
+                                <br>{{$notice['notice_name']}} {!! $notice['notice_blink']=='Yes' ? ' <img src="'.frontAsset('assets/images/new.gif').'" alt="New" border="0" align="absmiddle"/>' : '' !!}</a>
                             </li>
                           @endforeach
                         </ul>
@@ -1107,10 +1023,10 @@
       @php
         $i=0;
       @endphp
-      @foreach ($notices['Latest News'] as $notice)
+      @foreach ($notices['Latest News'] ?? [] as $notice)
         @if($i>0){{ '|' }}@endif
         <a href="{{$notice['url']}}"  target="{{ $notice['notice_open_in'] == 'new' ? '_blank' : '_parent' }}">
-          {{$notice['notice_name']}} {!! $notice['notice_blink']=='Yes' ? ' <img src="https://www.ombadc.in/images/new.gif" alt="New" border="0" align="absmiddle"/>' : '' !!}
+          {{$notice['notice_name']}} {!! $notice['notice_blink']=='Yes' ? ' <img src="'.frontAsset('assets/images/new.gif').'" alt="New" border="0" align="absmiddle"/>' : '' !!}
         </a>
         @php
         $i++;
@@ -1120,21 +1036,21 @@
   </div>
 
   @push('script')
-    <script src="https://www.ombadc.in/assets/js/jquery.min.js"></script>
-    <script src="https://www.ombadc.in/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="{{ frontAsset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ frontAsset('assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
     <script type="text/javascript" charset="UTF-8" src="https://www.gstatic.com/charts/51/loader.js"></script>
-    <script src="https://www.ombadc.in/assets/js/charts.js?v2"></script>
-    <script src="https://www.ombadc.office.aio.in/assets/js/exporting.js"></script>
-    <script type="text/javascript" src="https://www.ombadc.in/assets/js/chartsloader.js"></script>
-    <script src="https://www.ombadc.in/assets/js/main.js"></script>
-    <script src="https://www.ombadc.in/assets/js/plugins.js"></script>
-    <script src="https://www.ombadc.office.aio.in/assets/js/popper.min.js"></script>
+    <script src="{{ frontAsset('assets/js/charts.js?v2') }}"></script>
+    <script src="{{ frontAsset('assets/js/exporting.js') }}"></script>
+    <script type="text/javascript" src="{{ frontAsset('assets/js/chartsloader.js') }}"></script>
+    <script src="{{ frontAsset('assets/js/main.js') }}"></script>
+    <script src="{{ frontAsset('assets/js/plugins.js') }}"></script>
+    <script src="{{ frontAsset('assets/js/popper.min.js') }}"></script>
     <!-- Bootstrap JS -->
-    <script src="https://www.ombadc.in/assets/js/bootstrap.min.js"></script>
+    <script src="{{ frontAsset('assets/js/bootstrap.min.js') }}"></script>
     <!-- Plugins JS -->
     <!-- <script src="https://www.ombadc.in/assets/js/plugins.js"></script> -->
     <!-- Ajax Mail -->
-    <script src="https://www.ombadc.in/assets/js/ajax-mail.js"></script>
+    <script src="{{ frontAsset('assets/js/ajax-mail.js') }}"></script>
     <script>
       new WOW().init();
       $('.reset').click(function(){

@@ -163,6 +163,15 @@
               </li>
               @endcan
 
+              @can('view video-gallery')
+              <li class="side-nav-item">
+                  <a href="{{route('video-gallery.index')}}" class="side-nav-link">
+                      <span class="menu-icon"><i class="ri-image-ai-fill"></i></span>
+                      <span class="menu-text"> Video Gallery </span>
+                  </a>
+              </li>
+              @endcan
+
               <li class="side-nav-title">Admin Section</li>
 
               @can('view user')

@@ -2,7 +2,7 @@
 
   <div class="inner-banner">
     <img src="{{frontAsset('/assets/image/innerbanner.jpg')}}" alt width="100%" />
-    <p class="inner-banner__text"><a href>Home</a> <i
+    <p class="inner-banner__text"><a href="{{ route('home') }}">Home</a> <i
         class="fa-solid fa-angles-right"></i> {{(request()->segment(2) == "notice")?"Notice":"News & Events"}}</p>
   </div>
 

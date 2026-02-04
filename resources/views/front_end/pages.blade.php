@@ -190,6 +190,25 @@
       font-size: 30px;
       margin-top: 15px;
     }
+    .department-heading {
+            font-size: 2rem;
+            color: #008b3d;
+        }
+
+        .about-cont p {
+            font-size: 1.3rem;
+            line-height: 1.5;
+            color: #000;
+        }
+
+        .sambalpuri-bullet li {
+            font-size: 1.2rem;
+        }
+
+        td {
+            padding: 8px;
+            text-align: left;
+        }
   </style>
 @endpush
 

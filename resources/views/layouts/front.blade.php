@@ -281,9 +281,9 @@
                   <div class="logos row">
                     <div class="col-md-12" style="padding-left: 280px; position: relative;">
                       <div class="logo-main" id="logo-container">
-                        <img src="https://ombadc.in/images/logo-new.png" class="new-logo mainlogo-gsap" id="logo1">
+                        <img src="{{ frontAsset('assets/images/logo-new.png') }}" class="new-logo mainlogo-gsap" id="logo1">
                         <div class="sm-logo-area">
-                          <img src="https://ombadc.in/images/logo.png" class="sml-logo" style="display:none;" id="logo2">
+                          <img src="{{ frontAsset('assets/images/logo.png') }}" class="sml-logo" style="display:none;" id="logo2">
                         </div>
                       </div>
 
@@ -292,7 +292,7 @@
                           <div class="col-lg-8 col-md-9 col-10">
                             <div class="logo-area name-gsap">
                               <a href="<?= 3 ?>">
-                                <img src="https://www.ombadc.in/images/logo_black_011.png" alt="logo" class="main_logo"> 
+                                <img src="{{ frontAsset('assets/images/logo_black_011.png') }}" alt="logo" class="main_logo"> 
                               </a>
                             </div>
                           </div>
@@ -311,7 +311,7 @@
                             <!-- </div> -->
                             <!-- </div> -->
 
-                            <a href="https://odisha.gov.in/" target="_blank" class="images-logo-back" ><img src="https://www.ombadc.in/images/odisha_govt_logo.png" alt=""></a>
+                            <a href="https://odisha.gov.in/" target="_blank" class="images-logo-back" ><img src="{{ frontAsset('assets/images/odisha_govt_logo.png') }}" alt=""></a>
                           </d>
                         </div>
                         <div class="row">
@@ -321,7 +321,7 @@
                                 <div class="main-menu">
                                   <nav class="main-navigation ">
                                     <div class="menu-logo">
-                                      <a href="<?= 3 ?>"><img src="https://www.ombadc.in/images/logo.png" class="sticky_logo"></a>
+                                      <a href="<?= 3 ?>"><img src="{{ frontAsset('assets/images/logo.png') }}" class="sticky_logo"></a>
                                     </div>
                                     <ul>
                                       <li class="menu-gsap"><a href="{{route('home')}}">Home</a></li>
@@ -402,7 +402,7 @@
                 </div>
               </div>
               <div class="footer-logo">
-                <a href="index.html"><img src="https://www.ombadc.in/images/logo.png" class="img-responsive"></a>
+                <a href="index.html"><img src="{{ frontAsset('assets/images/logo.png') }}" class="img-responsive"></a>
               </div>
               <div class="footer-bottom">
                 <div>

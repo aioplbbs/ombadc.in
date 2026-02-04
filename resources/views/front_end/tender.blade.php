@@ -191,10 +191,10 @@
     @endpush
 
     <section class="section banner">
-      <div class="bg-banner" style="background-image: url('https://www.ombadc.in/images/innerbanner/history.jpg');background-size: cover;">
+      <div class="bg-banner" style="background-image: url('{{ frontAsset('assets/images/breadcrump.jpg') }}');background-size: cover;">
         <div class="b-title">
           <ul class="b-menu">
-            <li class="b-item"><a href="https://ombadc.office.aio.in/">Home</a></li>
+            <li class="b-item"><a href="{{ route('home') }}">Home</a></li>
             <li class="b-item"><a class="active">Tender</a></li>
           </ul>
           <h3> Tender </h3>

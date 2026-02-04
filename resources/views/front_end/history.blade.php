@@ -189,10 +189,10 @@
   </style>
     @endpush
     <section class="section banner">
-      <div class="bg-banner" style="background-image: url('https://www.ombadc.in/images/innerbanner/history.jpg');background-size: cover;">
+      <div class="bg-banner" style="background-image: url('{{ frontAsset('assets/images/breadcrump.jpg') }}');background-size: cover;">
         <div class="b-title">
           <ul class="b-menu">
-            <li class="b-item"><a href="https://ombadc.office.aio.in/">Home</a></li>
+            <li class="b-item"><a href="/">Home</a></li>
             <li class="b-item"><a href="javascript:void(0)">About Us</a></li>                        
             <li class="b-item"><a class="active">Our History</a></li>
           </ul>
@@ -201,7 +201,7 @@
       </div>
     </section>
     <section class="section">
-      <div class="his-sec" style="background-image: url(https://www.ombadc.in/images/pagephoto/history.jpg);">
+      <div class="his-sec" style="background-image: url({{ frontAsset('assets/images/history.jpg') }});">
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-6 col-md-12" style="background-color: #6bca86d4;text-align: center;">
@@ -278,7 +278,7 @@
             </div>
             <div class="col-lg-6 col-md-12">
               <div class="purpose-content">
-                <img src="https://www.ombadc.in/images/pagephoto/our-logo.png" alt="Our History" style="max-height:600px; border:none;">
+                <img src="{{ frontAsset('assets/images/our-logo.png') }}" alt="Our History" style="max-height:600px; border:none;">
               </div>
             </div>
           </div>

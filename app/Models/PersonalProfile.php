@@ -32,7 +32,7 @@ class PersonalProfile extends Model implements HasMedia
                 $slug = Str::slug($profile->name);
                 $count = $a = 0;
                 do {
-                    $count = Page::where('slug', $slug)->count();
+                    $count = PersonalProfile::where('slug', $slug)->count();
                     if ($count > 0) {
                         $a++;
                         $slug = Str::slug($profile->name) . '-' . $a;

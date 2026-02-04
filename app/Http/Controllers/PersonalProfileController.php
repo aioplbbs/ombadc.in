@@ -56,7 +56,7 @@ class PersonalProfileController extends Controller
         $personal_profile = PersonalProfile::create($data);
         if($request->hasFile('profile_image')){
             $file = $request->file('profile_image');
-            $personal_profile->addMedia($file)->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())->toMediaCollection('personal-profile');
+            $personal_profile->addMedia($file)->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())->toMediaCollection('personal_profile');
         }
         return redirect()->route('personal-profile.index')->with('success','Personal profile created successfully.');
     }
@@ -88,13 +88,13 @@ class PersonalProfileController extends Controller
     public function update(PersonalProfileRequest $request, PersonalProfile $personalProfile)
     {
         $data=$request->all();
-        $media = $personalProfile->getFirstMedia('personal-profile');
+        $media = $personalProfile->getFirstMedia('personal_profile');
         if($request->hasFile('profile_image')){
             if($media){
                 $media->delete();
             }
             $file = $request->file('profile_image');
-            $personalProfile->addMedia($file)->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())->toMediaCollection('personal-profile');
+            $personalProfile->addMedia($file)->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())->toMediaCollection('personal_profile');
         }
         $personalProfile->update($data);
         return redirect()->route('personal-profile.index')->with('success','Personal profile updated successfully.');
@@ -106,6 +106,7 @@ class PersonalProfileController extends Controller
     public function destroy(PersonalProfile $personalProfile)
     {
         $personalProfile->delete();
+        $personalProfile->clearMediaCollection('personal_profile');
         return redirect()->route('personal-profile.index')->with('success','Personal profile deleted successfully.');
     }
 

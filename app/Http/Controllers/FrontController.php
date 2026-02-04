@@ -13,6 +13,7 @@ use App\Models\Faculty;
 use App\Models\Setting;
 use App\Models\Gallery;
 use App\Models\PersonalProfile;
+use App\Models\VideoGallery;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class FrontController extends Controller
@@ -34,7 +35,7 @@ class FrontController extends Controller
             }
         }
 
-        $setting = Banner::where('caption', 'Homepage')->get();
+        $setting = Banner::where('caption', 'Homepage')->first();
         // dd($setting);
         
         $banners = $setting;
@@ -139,6 +140,25 @@ class FrontController extends Controller
             $galleries = Gallery::get();
             return view('front_end.gallery', compact('menus', 'galleries', 'departments', 'slug'));
         }
+    }
+
+    public function videoGallery(Request $request)
+    {
+        $setting = Setting::where('name', 'menu')
+            ->with(['menus' => function($q){
+                $q->whereNull('parent_id')->orderBy('position', 'asc')->with('children');
+            }])->get();
+
+        if(!empty($setting)){
+            foreach ($setting as $value) {
+                $menus[$value->data['name']] = $this->buildMenuTree($value->menus);
+            }
+        }
+
+        $videos = VideoGallery::all();
+        $departments = Department::all();
+
+        return view('front_end.video-gallery', compact('menus', 'videos', 'departments'));
     }
 
     public function all(Request $request, $slug)
@@ -276,7 +296,7 @@ class FrontController extends Controller
         }
 
         $departments = Department::all();
-        $personal_profiles = PersonalProfile::all();
+        $personal_profiles = PersonalProfile::orderBy('order')->get();
 
         return view('front_end.whos-who', compact('menus', 'departments', 'personal_profiles'));
     }

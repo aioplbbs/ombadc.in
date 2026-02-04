@@ -4,10 +4,10 @@
     @endpush
 
     <section class="section banner">
-        <div class="bg-banner" style="background-image: url('https://www.ombadc.in/images/innerbanner/history.jpg');background-size: cover;">
+        <div class="bg-banner" style="background-image: url('{{ frontAsset('assets/images/breadcrump.jpg') }}');background-size: cover;">
             <div class="b-title">
                 <ul class="b-menu">
-                    <li class="b-item"><a href="https://ombadc.office.aio.in/">Home</a></li>
+                    <li class="b-item"><a href="{{ route('home') }}">Home</a></li>
                     <li class="b-item"><a href="javascript:void(0)">About Us</a></li>                        
                     <li class="b-item"><a class="active">Organogram</a></li>
                 </ul>
@@ -24,7 +24,7 @@
                         <div class="staff_card-1">                          
                             <div class="staff_info">
                                 <div class="staff_image">
-                                    <img src="https://www.ombadc.in/images/oversight.jpg" alt="" class="card-img-top" />
+                                    <img src="{{ frontAsset('assets/images/oversight.jpg') }}" alt="" class="card-img-top" />
                                 </div>
                                 <div class="staff_name_container padd19px">
                                     <div class="staff_name">
@@ -235,9 +235,9 @@
             <a class="close" href="#section" id="section2">&times;</a>
             <div class="bod-image-organogram">
                 <div class="bod-first"> 
-                    @foreach($personal_profiles as $personal_profile)
+                    @foreach($personal_profiles->where('staff_category', 'Board Of Directors (Officials)') as $personal_profile)
 					@php
-						$imageUrl = $personal_profile->getFirstMediaUrl('personal-profile');
+						$imageUrl = $personal_profile->getFirstMediaUrl('personal_profile');
 					@endphp
                     <div class="card" style="width:150px;height: 150px !important;">
                         <div class="card-img" style="margin:0;border-radius:10%; box-shadow: none; text-align:center"> 
@@ -256,9 +256,9 @@
             <a class="close" href="#section" id="section3">&times;</a>
             <div class="bod-image-organogram">
                 <div class="bod-first"> 
-                    @foreach($personal_profiles as $personal_profile)
+                    @foreach($personal_profiles->where('staff_category', 'PMU') as $personal_profile)
 					@php
-						$imageUrl = $personal_profile->getFirstMediaUrl('personal-profile');
+						$imageUrl = $personal_profile->getFirstMediaUrl('personal_profile');
 					@endphp
                     <div class="card" style="height: 220px !important;">
                         <div class="card-img" style="margin:0;border-radius:10%; box-shadow: none; text-align:center"> 

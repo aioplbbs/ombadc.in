@@ -20,10 +20,10 @@
     </style>
     @endpush
     <section class="section banner">
-		<div class="bg-banner" style="background-image: url('https://www.ombadc.in/images/innerbanner/history.jpg');background-size: cover;">
+		<div class="bg-banner" style="background-image: url('{{ frontAsset('assets/images/breadcrump.jpg') }}');background-size: cover;">
 			<div class="b-title">
 				<ul class="b-menu">
-					<li class="b-item"><a href="">Home</a></li>
+					<li class="b-item"><a href="{{ route('home') }}">Home</a></li>
 					<li class="b-item"><a href="javascript:void(0)">About Us</a></li>
 					<li class="b-item"><a class="active">PMU</a></li>
 				</ul>
@@ -36,9 +36,12 @@
 		<div class="sec-bg">
 			<div class="container-fluid">
 				<div class="row justify-content-center">
+					@php
+					$i=0;
+					@endphp
                     @foreach($personal_profiles as $personal_profile)
                     @php
-                    $image_url = $personal_profile->getFirstMediaUrl('personal-profile')
+                    $image_url = $personal_profile->getFirstMediaUrl('personal_profile')
                     @endphp
                     @if($i==0)
                     <div class="col-xl-12 col-lg-5 col-md-6">
@@ -49,7 +52,7 @@
 								</div>
 								<div class="bottom">
 									<div class="content"><br>
-										<p class="about-me">{{ $personal_profile->expertise }}</p>
+										<p class="about-me">{{ $personal_profile->short_brief }}</p>
 									</div>
 									<div class="bottom-bottom">
 										<span class="name">{{ $personal_profile->name }}</span>
@@ -70,7 +73,7 @@
 							</div>
 							<div class="bottom">
 								<div class="content"><br>
-									<p class="about-me">{{ $personal_profile->expertise }}</p>
+									<p class="about-me">{{ $personal_profile->short_brief }}</p>
 								</div>
 								<div class="bottom-bottom">
 									<span class="name">{{ $personal_profile->name }}</span>

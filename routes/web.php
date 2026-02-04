@@ -33,6 +33,7 @@ use App\Http\Controllers\MIS\SectorController as MISSectorController;
 use App\Http\Controllers\MIS\UserController as MISUserController;
 use App\Http\Controllers\MIS\WorkflowController;
 use App\Http\Controllers\MIS\WorkflowStepsController;
+use App\Http\Controllers\VideoGalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,7 @@ Route::get('/pages/{slug}', [FrontController::class, 'page'])->name('pages');
 Route::get('/faculties/{slug}', [FrontController::class, 'faculty']);
 Route::get('/profile/{slug}', [FrontController::class, 'profile']);
 Route::get('/galleries/{slug?}', [FrontController::class, 'gallery'])->name('galleries');
+Route::get('/video-galleries', [FrontController::class, 'videoGallery'])->name('video-galleries');
 Route::get('/all/{slug}', [FrontController::class, 'all']);
 Route::get('/history', [FrontController::class, 'history']);
 Route::get('/purpose-of-spv', [FrontController::class, 'purpose']);
@@ -69,6 +71,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])
     Route::resource('/notice', NoticeController::class)->except(['show']);
     Route::resource('/gallery', GalleryController::class)->except(['show']);
     Route::delete('/gallery/{gallery}/image-destroy/{gid}', [GalleryController::class, 'imageDestroy'])->name('gallery.image_destroy');
+    Route::resource('/video-gallery', VideoGalleryController::class)->except(['show']);
     Route::resource('/page', PageController::class)->except(['show']);
     Route::delete('/page/{page}/image-destroy/{gid}', [PageController::class, 'imageDestroy'])->name('page.image_destroy');
     Route::prefix('menus')->group(function () {
