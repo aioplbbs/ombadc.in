@@ -95,7 +95,7 @@
             <div class="card-body">
                 
                 <div class="table-responsive-sm">
-                    <div class="dd" id="nestable">
+                    <div class="dd w-100 overflow-scroll" style="max-width: 100% !important;" id="nestable">
                         <ol class="dd-list ">
                             
                             @if(!empty($personal_profiles))

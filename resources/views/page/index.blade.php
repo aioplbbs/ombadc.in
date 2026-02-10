@@ -3,9 +3,15 @@
         <div class="card">
             <div class="card-header border-bottom border-dashed d-flex align-items-center justify-content-between">
                 <h4 class="header-title">Pages List</h4>
-                @can('create page')
-                <a href="{{route('page.create')}}" class="btn btn-primary btn-sm" > Add Page </a>
-                @endcan
+                <div class="d-flex gap-3 align-items-center justify-content-center">
+                    <form method="get" class="d-flex gap-2" action="{{ route('page.index') }}">
+                        <input type="text" class="form-control" name="search" value="{{ request('search') ?? '' }}"/>
+                        <button class="btn btn-primary btn-sm" type="submit">Search</button>
+                    </form>
+                    @can('create page')
+                    <a href="{{route('page.create')}}" class="btn btn-primary btn-sm" > Add Page </a>
+                    @endcan
+                </div>
             </div>
             <div class="card-body">
                 
@@ -41,6 +47,7 @@
                             @endif
                         </tbody>
                     </table>
+                    {{$pages->links('pagination::bootstrap-5')}}
                 </div> <!-- end table-responsive-->
             </div> <!-- end card body-->
         </div> <!-- end card -->

@@ -22,14 +22,17 @@ class PageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $breadcrumb = [
             'title' => "Page List",
             'items' => ["Home"],
             'last_item' => "Pages"
         ];
-        $pages = Page::whereNotIn('page_type', ['Sector'])->orderBy('id', 'desc')->get();
+        $pages = Page::whereNotIn('page_type', ['Sector'])
+            ->when($request->filled('search'), function($q) use($request){
+                $q->where('name', 'LIKE', "%".$request->search."%");
+            })->orderBy('id', 'desc')->paginate(15);
         return view('page.index', compact('pages', 'breadcrumb'));
     }
 

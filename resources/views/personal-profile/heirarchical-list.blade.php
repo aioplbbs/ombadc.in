@@ -3,7 +3,7 @@
     <li class="dd-item" data-id="{{ $item->id }}">
         <div class="dd-handle p-2 d-flex align-items-center justify-content-center">
             @php
-                $imageUrl = $item->getFirstMediaUrl('personal-profile');
+                $imageUrl = $item->getFirstMediaUrl('personal_profile');
             @endphp
 
             @if($imageUrl)

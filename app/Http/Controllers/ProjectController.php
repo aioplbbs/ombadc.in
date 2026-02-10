@@ -29,7 +29,7 @@ class ProjectController extends Controller
             'items' => ["Home"],
             'last_item' => "Project"
         ];
-        $projects = Project::orderBy('id', 'desc')->paginate(20);
+        $projects = Project::orderBy('created_at', 'asc')->paginate(20);
         return view('project.index', compact('breadcrumb', 'projects'));
     }
 
