@@ -72,7 +72,7 @@
         return $personal_profile->staff_category == 'Expert';
     });
     $supporting_staffs = $personal_profiles->filter(function($personal_profile){
-        return $personal_profile->staff_category == 'Supporting Staff';
+        return $personal_profile->staff_category == 'Supporting Staff' || $personal_profile->staff_category == 'Other';
     });
     @endphp
     
