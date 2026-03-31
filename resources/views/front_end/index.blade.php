@@ -925,8 +925,9 @@
                       </div>
                       <div class="container_marquee blur">
                         <ul class="slider_marquee">
-                          @if(!empty($notices))
+                          @if(!empty($notices['Latest News']))
                           @foreach ($notices['Latest News'] as $notice)
+                          
                             <li class="pt-3">
                               <div class="date-box">
                                 <div class="date">
@@ -940,7 +941,7 @@
                                 </div>
                               </div>
                               <div class="notice-body-text">
-                                <a class="hov" style="color: #01321f;" href="{{ $notice['url'] }}" target="{{ $notice['notice_open_in'] == 'new' ? '_blank' : '_parent' }}">
+                                <a class="hov" style="color: #01321f;" href="{{ $notice['url'] }}" target="{{ $notice['notice_open_in'] == 'New' ? '_blank' : '_parent' }}">
                                   <p class="heading_n">{{ $notice['notice_name'] }} {!! $notice['notice_blink']=='Yes' ? ' <img src="'.frontAsset('assets/images/new.gif').'" alt="New" border="0" align="absmiddle"/>' : '' !!}</p>
                                 </a>
                               </div>
@@ -1025,7 +1026,7 @@
       @endphp
       @foreach ($notices['Latest News'] ?? [] as $notice)
         @if($i>0){{ '|' }}@endif
-        <a href="{{$notice['url']}}"  target="{{ $notice['notice_open_in'] == 'new' ? '_blank' : '_parent' }}">
+        <a href="{{$notice['url']}}"  target="{{ $notice['notice_open_in'] == 'New' ? '_blank' : '_parent' }}">
           {{$notice['notice_name']}} {!! $notice['notice_blink']=='Yes' ? ' <img src="'.frontAsset('assets/images/new.gif').'" alt="New" border="0" align="absmiddle"/>' : '' !!}
         </a>
         @php
@@ -1266,6 +1267,7 @@
 <script type="text/javascript">
   @foreach($sectors as $sector)
     $(function() {
+    console.log("Hello");
       $('#sector_{{ $sector->id }}').highcharts({
         chart: {
           type: 'column'

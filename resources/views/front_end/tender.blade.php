@@ -205,16 +205,23 @@
     <section class="section">
         <div class="maain-meeting-grid">
             @foreach($tenders as $tender)
+                @php
+                    $image = $tender->getFirstMediaUrl('tender_image');
+
+                    if(!$image){
+                        $image = 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=';
+                    }
+                @endphp
                 <a class="maain-meeting-grid-box" target="_blank" href="{{ $tender->notice_type == 'Link' ? $tender->custom_data['web_link'] : '' }}">
                     <div >
-                        <img src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" alt="image">
+                        <img src="{{ $image }}" alt="image">
                         <p class="meeting-caption">
-                            <span class="tender-no">{{ $tender->id }}<br></span>
-                            {{ $tender->notice_name }} {!! $tender->notice_blink == 'Yes' ? '<img src="https://www.ombadc.in/images/new.gif" alt="New" border="0" align="absmiddle"/>' : '' !!}
+                            <!-- <span class="tender-no">{{ $tender->id }}<br></span> -->
+                            {{ $tender->notice_name }} {!! $tender->notice_blink == 'Yes' ? '<img src="' . frontAsset('assets/images/new.gif') . '" alt="New" border="0" align="absmiddle" style="height:auto;"/>' : '' !!}
                             
                         </p>
                         <p class="pub-date">PUBLISH DATE <br><span><?=date("d/m/Y", strtotime($tender->notice_publish))?></span></p>
-                        <p class="exp-date">EXPIRY DATE <br><span><?=date("d/m/Y", strtotime($tender->notice_publish))?></span></p>
+                        <p class="exp-date">EXPIRY DATE <br><span><?=date("d/m/Y", strtotime($tender->custom_data['expiry_date'] ?? $tender->notice_publish))?></span></p>
                     </div>
                 </a>
             @endforeach

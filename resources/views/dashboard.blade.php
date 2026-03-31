@@ -14,7 +14,7 @@
                 >
                   Total Notices
                 </h5>
-                <h3 class="my-2 py-1 fw-bold">1</h3>
+                <h3 class="my-2 py-1 fw-bold">0</h3>
               </div>
               <div class="avatar-xl flex-shrink-0">
                 <span

@@ -18,8 +18,8 @@
                             <label for="name" class="form-label">Status</label>
                             <select name="status" id="" class="form-control">
                                 <option value="0">Choose Status</option>
-                                <option value="Show" >Show</option>
-                                <option value="Hide" >Hide</option>
+                                <option value="Show" {{ optional($banner->getFirstMedia('banner'))->getCustomProperty('status') == 'Show' ? 'selected' : '' }}>Show</option>
+                                <option value="Hide" {{ optional($banner->getFirstMedia('banner'))->getCustomProperty('status') == 'Hide' ? 'selected' : '' }}>Hide</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -29,9 +29,19 @@
                     </div>
                     <div class="col-xl-12 mb-2 row">
                         @foreach($banner->getMedia('banner') as $value)
-                        <div class="col-md-1 me-1" style="border:1px solid lightgray;box-shadow: rgba(99, 99, 99, 0.2) 0px 1px 4px 0px;">
+                        <div class="col-md-2 me-1 mb-5 p-2" style="border:1px solid lightgray;box-shadow: rgba(99, 99, 99, 0.2) 0px 1px 4px 0px;">
                             <div style="width:100%;height:70%;">
                             <img src="{{$value->getUrl('thumb')}}" alt="{{$banner->caption}}" class="img-fluid" style="height:100%; width:100%;object-fit:contain;">
+                            </div>
+                            <div class="mt-2">
+                                <label for="media_caption_{{ $value->id }}" class="form-label">Caption</label>
+                                <input
+                                    type="text"
+                                    id="media_caption_{{ $value->id }}"
+                                    name="media_caption[{{ $value->id }}]"
+                                    class="form-control"
+                                    value="{{ old('media_caption.' . $value->id, $value->getCustomProperty('caption')) }}"
+                                >
                             </div>
                             <div class="fs-20 text-danger d-flex justify-content-center"
                                 onclick="deleteFunction(`{{ route('gallery.image_destroy', ['gallery' => $banner->id, 'gid' => $value->id]) }}`)"

@@ -58,6 +58,10 @@ class PageController extends Controller
         $data['page_content'] = Purifier::clean($data['page_content'], 'relaxed');
         $page = New Page($data);
         $page->save();
+        $page->customData()->updateOrCreate(
+            ['name' => 'custom_fields'],
+            ['data' => ['url' => $request->input('custom_fields.url')]]
+        );
         if($request->hasFile('banner')){
             $file = $request->file('banner');
             $page->addMedia($file)->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())->toMediaCollection('page_banner');
@@ -119,6 +123,10 @@ class PageController extends Controller
         }
         $data['page_content'] = Purifier::clean($data['page_content'], 'relaxed');
         $page->update($data);
+        $page->customData()->updateOrCreate(
+            ['name' => 'custom_fields'],
+            ['data' => ['url' => $request->input('custom_fields.url')]]
+        );
 
         return redirect()->route('page.index')->with('success', "Page Updated Successfully.");
     }

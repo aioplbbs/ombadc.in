@@ -76,6 +76,10 @@
                                     <label class="form-check-label" for="Department-website">Department Website</label>
                                 </div>
                             </div>
+                            <div class="mb-3">
+                                <label for="custom_fields_url" class="form-label">URL</label>
+                                <input type="url" id="custom_fields_url" name="custom_fields[url]" class="form-control" value="{{ old('custom_fields.url') }}">
+                            </div>
                             <div class="row mb-3">
                                 <div class="col-md-4">
                                     <label for="banner" class="form-label">Upload Banner</label>

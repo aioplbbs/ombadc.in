@@ -130,6 +130,27 @@
                                     value="{{ old('notice_publish', $notice->notice_publish) }}">
                             </div>
 
+                            <div class="{{ in_array('Tender', $selectedCategories) ? '' : 'd-none' }}" id="tender_fields">
+                                <div class="mb-3">
+                                    <label for="tender_expiry_date" class="form-label">Expiry Date</label>
+                                    <input type="text" id="tender_expiry_date" name="tender_expiry_date"
+                                        class="form-control flatpickr-input"
+                                        data-provider="flatpickr" data-date-format="Y-m-d" readonly="readonly"
+                                        value="{{ old('tender_expiry_date', $notice->custom_data['expiry_date'] ?? '') }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tender_image" class="form-label">Tender Image</label>
+                                    <input type="file" id="tender_image" name="tender_image" class="form-control">
+
+                                    @if($notice->getFirstMedia('tender_image'))
+                                        <p class="mt-2">
+                                            Current Image:
+                                            <a href="{{ $notice->getFirstMediaUrl('tender_image') }}" target="_blank">View</a>
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
+
                             {{-- Web Link --}}
                             <div class="mb-3 {{ old('notice_type', $notice->notice_type) == 'Link' ? '' : 'd-none' }}" id="web_link">
                                 <label for="web_link" class="form-label">Web Link</label>
@@ -163,8 +184,8 @@
 
     @push('script')
     <script>
-        $("input[name='notice_type']").on('change', function(){
-            var notice_type = $(this).val();
+        function toggleNoticeTypeFields() {
+            var notice_type = $("input[name='notice_type']:checked").val();
             if(notice_type == "Link"){
                 $("#web_link").removeClass('d-none');
                 $("#uploadfile").addClass('d-none');
@@ -172,7 +193,26 @@
                 $("#uploadfile").removeClass('d-none');
                 $("#web_link").addClass('d-none');
             }
+        }
+
+        function toggleTenderFields() {
+            if($("#tender").is(':checked')){
+                $("#tender_fields").removeClass('d-none');
+            }else{
+                $("#tender_fields").addClass('d-none');
+            }
+        }
+
+        $("input[name='notice_type']").on('change', function(){
+            toggleNoticeTypeFields();
         });
+
+        $("#tender").on('change', function(){
+            toggleTenderFields();
+        });
+
+        toggleNoticeTypeFields();
+        toggleTenderFields();
     </script>
     @endpush
 </x-app-layout>

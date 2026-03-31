@@ -39,6 +39,7 @@
                             @endif
                         </tbody>
                     </table>
+                    {{$departments->links('pagination::bootstrap-5')}}
                 </div> <!-- end table-responsive-->
             </div> <!-- end card body-->
         </div> <!-- end card -->

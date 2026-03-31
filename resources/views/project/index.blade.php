@@ -24,7 +24,7 @@
                             @if(!empty($projects))
                             @foreach($projects as $key => $value)
                             <tr>
-                                <td>{{$value->name}}</td>
+                                <td>{!!$value->name!!}</td>
                                 <td>{{$value->sanctioned}}</td>
                                 <td>{{$value->released}}</td>
                                 <td>{{$value->utilized}}</td>

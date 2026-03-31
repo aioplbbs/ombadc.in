@@ -30,6 +30,8 @@ class NoticeRequest extends FormRequest
             'notice_blink'      => 'required|in:Yes,No',
             'notice_publish'    => 'required|date',
             'custom_data'       => 'nullable|string',
+            'tender_expiry_date' => 'nullable|date',
+            'tender_image' => 'nullable|file|mimetypes:image/jpeg,image/png,image/webp,image/gif|max:2048',
             'status'       => 'nullable|in:Show,Hide',
         ];
 

@@ -69,6 +69,16 @@
                                 <label for="publish_date" class="form-label">Publish Date</label>
                                 <input type="text" id="publish_date" name="notice_publish" class="form-control flatpickr-input" data-provider="flatpickr" data-date-format="Y-m-d" readonly="readonly" value="{{old('notice_publish')}}">
                             </div>
+                            <div class="{{ in_array('Tender', old('notice_category', [])) ? '' : 'd-none' }}" id="tender_fields">
+                                <div class="mb-3">
+                                    <label for="tender_expiry_date" class="form-label">Expiry Date</label>
+                                    <input type="text" id="tender_expiry_date" name="tender_expiry_date" class="form-control flatpickr-input" data-provider="flatpickr" data-date-format="Y-m-d" readonly="readonly" value="{{ old('tender_expiry_date') }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tender_image" class="form-label">Tender Image</label>
+                                    <input type="file" id="tender_image" name="tender_image" class="form-control">
+                                </div>
+                            </div>
                             <div class="mb-3 {{old('notice_type', 'Upload File')=='Link'?'':'d-none'}}" id="web_link">
                                 <label for="web_link" class="form-label">Web Link</label>
                                 <input type="text" id="web_link" name="web_link" class="form-control">
@@ -90,8 +100,8 @@
 
     @push('script')
     <script>
-        $("input[name='notice_type']").on('change', function(){
-            var notice_type = $(this).val();
+        function toggleNoticeTypeFields() {
+            var notice_type = $("input[name='notice_type']:checked").val();
             if(notice_type == "Link"){
                 $("#web_link").removeClass('d-none');
                 $("#uploadfile").addClass('d-none');
@@ -99,7 +109,26 @@
                 $("#uploadfile").removeClass('d-none');
                 $("#web_link").addClass('d-none');
             }
+        }
+
+        function toggleTenderFields() {
+            if($("#tender").is(':checked')){
+                $("#tender_fields").removeClass('d-none');
+            }else{
+                $("#tender_fields").addClass('d-none');
+            }
+        }
+
+        $("input[name='notice_type']").on('change', function(){
+            toggleNoticeTypeFields();
         });
+
+        $("#tender").on('change', function(){
+            toggleTenderFields();
+        });
+
+        toggleNoticeTypeFields();
+        toggleTenderFields();
     </script>
     @endpush
 </x-app-layout>

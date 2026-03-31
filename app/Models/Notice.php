@@ -35,5 +35,6 @@ class Notice extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('notice');
+        $this->addMediaCollection('tender_image');
     }
 }

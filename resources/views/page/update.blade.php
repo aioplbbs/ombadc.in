@@ -8,6 +8,9 @@
                 <form action="{{ route('page.update', $page->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+                    @php
+                        $customFields = $page->customData()->where('name', 'custom_fields')->value('data') ?? [];
+                    @endphp
 
                     <div class="row">
                         <div class="col-xl-6">
@@ -43,6 +46,67 @@
                                         {{ old('page_type', $page->page_type) == 'None' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="None">None</label>
                                 </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Downloads" name="page_type" value="Downloads" class="form-check-input"
+                                        {{ old('page_type', $page->page_type) == 'Downloads' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="Downloads">Downloads</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Annual-reports" name="page_type" value="Annual Reports" class="form-check-input"
+                                        {{ old('page_type', $page->page_type) == 'Annual Reports' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="Annual-reports">Annual Reports</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Brochures" name="page_type" value="Brochures" class="form-check-input"
+                                        {{ old('page_type', $page->page_type) == 'Brochures' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="Brochures">Brochures</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Meetings" name="page_type" value="Meetings" class="form-check-input"
+                                        {{ old('page_type', $page->page_type) == 'Meetings' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="Meetings">Meetings</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Orders" name="page_type" value="Orders" class="form-check-input"
+                                        {{ old('page_type', $page->page_type) == 'Orders' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="Orders">Orders</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Guidelines" name="page_type" value="Guidelines" class="form-check-input"
+                                        {{ old('page_type', $page->page_type) == 'Guidelines' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="Guidelines">Guidelines</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Success-story" name="page_type" value="Success Story" class="form-check-input"
+                                        {{ old('page_type', $page->page_type) == 'Success Story' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="Success-story">Success Story</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Documents" name="page_type" value="Documents" class="form-check-input"
+                                        {{ old('page_type', $page->page_type) == 'Documents' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="Documents">Documents</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Articles" name="page_type" value="Articles" class="form-check-input"
+                                        {{ old('page_type', $page->page_type) == 'Articles' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="Articles">Articles</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Repository" name="page_type" value="Repository" class="form-check-input"
+                                        {{ old('page_type', $page->page_type) == 'Repository' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="Repository">Repository</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" id="Department-website" name="page_type" value="Department Website" class="form-check-input"
+                                        {{ old('page_type', $page->page_type) == 'Department Website' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="Department-website">Department Website</label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="custom_fields_url" class="form-label">URL</label>
+                                <input type="url" id="custom_fields_url" name="custom_fields[url]" class="form-control"
+                                    value="{{ old('custom_fields.url', $customFields['url'] ?? '') }}">
                             </div>
 
                             <div class="row mb-3">

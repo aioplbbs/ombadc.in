@@ -98,34 +98,40 @@ class BannerController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'banner' => 'image|max:2048', // 5MB max
-            'status' => 'in:Show,Hide'
+            'banner' => 'nullable|array',
+            'banner.*' => 'nullable|image|max:2048',
+            'status' => 'nullable|in:Show,Hide',
+            'media_caption' => 'nullable|array',
+            'media_caption.*' => 'nullable|string|max:255',
         ]);
-        // $setting = Setting::where('name', 'banner')->first();
         $banner = Banner::findOrFail($id);
-        $media = $banner->getFirstMedia('banner');
+        $existingMedia = $banner->getMedia('banner');
 
-        if ($request->hasFile('banner') && !empty($banner)) {
-            $media->delete();
-            $file = $request->file('banner');
-            $banner->addMedia($file)
-                ->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())
-                ->withCustomProperties([
-                    'status' => $request->status
-                ])
-                ->toMediaCollection('banner');
-                $banner->update([
-                    'caption'=>$request->name
-                ]);
-            return redirect()->route('banner.index')->with('success', 'Banner Uploaded Successfully.');
-        }else{
-            $media->setCustomProperty('status', $request->status);
+        foreach ($existingMedia as $media) {
+            $media->setCustomProperty('caption', $request->input("media_caption.{$media->id}"));
+            if ($request->filled('status')) {
+                $media->setCustomProperty('status', $request->status);
+            }
             $media->save();
-            $banner->update([
-                'caption'=>$request->name
-            ]);
         }
-        return redirect()->route('banner.index')->with('error', 'There is some error. Please try after sometime.');
+
+        if ($request->hasFile('banner')) {
+            foreach ($request->file('banner') as $file) {
+                $banner->addMedia($file)
+                    ->usingFileName(Str::random(16) . '.' . $file->getClientOriginalExtension())
+                    ->withCustomProperties([
+                        'status' => $request->status,
+                        'caption' => '',
+                    ])
+                    ->toMediaCollection('banner');
+            }
+        }
+
+        $banner->update([
+            'caption' => $request->name
+        ]);
+
+        return redirect()->route('banner.index')->with('success', 'Banner Updated Successfully.');
     }
 
     /**

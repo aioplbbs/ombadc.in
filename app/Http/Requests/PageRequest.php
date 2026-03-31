@@ -33,6 +33,8 @@ class PageRequest extends FormRequest
             'banner' => 'nullable|file|mimetypes:image/jpeg,image/png,image/webp,image/gif|max:2048',
             'photo' => 'nullable|file|mimetypes:image/jpeg,image/png,image/webp,image/gif|max:2048',
             'page_type'=> 'nullable|string',
+            'custom_fields' => 'nullable|array',
+            'custom_fields.url' => 'nullable|url|max:2048',
             'gallery'=> 'nullable|array',
             'gallery.*'=> 'nullable|string',
             'poster_id'=> 'nullable|string',
