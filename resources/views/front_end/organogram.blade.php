@@ -41,11 +41,11 @@
                         <div class="staff_card-1">                          
                             <div class="staff_info">
                                 <div class="staff_image">
-                                    <img src="https://d2er6gsnxjpdia.cloudfront.net/664/eGAqN8oXM1tW1ZV4.png" alt="" class="card-img-top" />
+                                    <img src="https://d2er6gsnxjpdia.cloudfront.net/636/9ltbp126Ol6FIyKP.png" alt="" class="card-img-top" />
                                 </div>
                                 <div class="staff_name_container">
                                     <div class="staff_name">
-                                        Shri Manoj Ahuja, IAS
+                                        Smt. Anu Garg, IAS
                                     </div>
                                     <div class="staff_title">
                                         Chairman
