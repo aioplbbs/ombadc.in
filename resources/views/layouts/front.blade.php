@@ -410,7 +410,12 @@
                     <div class="copyright">
                       <div class="copy-right pt--10 pb--10 text-center text-white">
                         <p style="color: white;">&copy; <?= date("Y") ?> OMBADC,All Right Reserved. Developed and Maintained
-                          by <span><a href="https://allindiaonline.in/" target="_blank">All India On-Line Pvt. Ltd.</a></span></p>
+                          by 
+                          <span>
+                            <!-- <a href="https://allindiaonline.in/" target="_blank">All India On-Line Pvt. Ltd.</a> -->
+                            <a href="" target="_blank">OMBADC</a>
+                          </span>
+                        </p>
                       </div>
                     </div>
                   </div>
